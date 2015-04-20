@@ -31,7 +31,8 @@ TEST_TELEVISIONS = [
 		outputs: [
 			{ type: 'audio-l', quantity: 1 },
 			{ type: 'audio-r', quantity: 1 }, 
-			{ type: 'headphones', quantity: 1, workit: true // testing to see if this shows up -- not part of the schema
+			{ type: 'headphones', quantity: 1 
+			// workit: true // testing to see if this shows up -- not part of the schema
 		}]
 	},
 	{
@@ -66,20 +67,33 @@ TEST_TELEVISIONS.forEach(function createTelevision(television, index, array) {
 	frisby.create('POST create television ' + television.brand)
 		.post(URL,
 			{ 
-				'component': television.component,
-			  	'brand': television.brand,
-			  	'cost': television.cost,
-			  	'performance': television.performance,
-			  	'reliability': television.reliability,
-			  	'height': television.height,
-			  	'width': television.width,
-			  	'thickness': television.thickness,
-			  	'weight': television.weight,
-			  	'inputs': television.inputs,
-			  	'outputs': television.outputs
+				component: television.component,
+			  	brand: television.brand,
+			  	cost: television.cost,
+			  	performance: television.performance,
+			  	reliability: television.reliability,
+			  	height: television.height,
+			  	width: television.width,
+			  	thickness: television.thickness,
+			  	weight: television.weight,
+			  	inputs: television.inputs,
+			  	outputs: television.outputs
 			})
 		.expectStatus(201)
 		.expectHeader('Content-type', 'application/json; charset=utf-8')
+		.expectJSON({
+				component: television.component,
+			  	brand: television.brand,
+			  	cost: television.cost,
+			  	performance: television.performance,
+			  	reliability: television.reliability,
+			  	height: television.height,
+			  	width: television.width,
+			  	thickness: television.thickness,
+			  	weight: television.weight,
+			  	inputs: television.inputs,
+			  	outputs: television.outputs
+		})
 		.toss()
 });
 

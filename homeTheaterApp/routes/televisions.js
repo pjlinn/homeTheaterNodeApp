@@ -21,13 +21,10 @@ router.get('/getOneLg', function(req, res, next) {
 		if (err) { return err };
 		res.json(television);
 	});
-})
+});
 
 // POST /televisions listing
 router.post('/', function(req, res, next) {
-	
-	res.status(201);
-	res.json({ status: "wut" }); // If I don't have a res.something I get a 404 error even with the 201 response
 
 	var television = new Television;
 	
@@ -45,37 +42,38 @@ router.post('/', function(req, res, next) {
 	television.width = req.body.width;
 	television.thickness = req.body.thickness;
 	television.weight = req.body.weight;
-	television.inputs = [];
-	television.outputs = [];
+	television.inputs = req.body.inputs;
+	television.outputs = req.body.outputs;
+	// Not really necessary to add the inputs/outputs like this
+	// var inputs  = req.body.inputs;
+	// var outputs = req.body.outputs;
 
-	var inputs  = req.body.inputs;
-	var outputs = req.body.outputs;
+	// inputs.forEach(function postInput(input, index, array) {
+	// 	television.inputs.push(input);
+	// });
 
-	inputs.forEach(function postInput(input, index, array) {
-		television.inputs.push(input);
-	});
-
-	outputs.forEach(function postOutput(output, index, array) {
-		television.outputs.push(output);
-	});
+	// outputs.forEach(function postOutput(output, index, array) {
+	// 	television.outputs.push(output);
+	// });
 
 	television.save(function (err, televisions) {
 		if (err) {
-			// console.log("Mongoose error creating a new television");
-			// res.status(400);
-			// res.json({ error: err });
+			console.log("Mongoose error creating a new television");
+			res.status(400);
+			res.json({ error: err });
 		} else {
-			/*
-				Copied this from the ctindel example, but it keeps throwing
-				the error: "Error: Can't set headers after they are sent."
-				I think it's a problem with the callbacks/async processing.
-				For now, just put 201 status at the top to pass the frisby test.
-			*/
-			// res.status(201);
-			// res.send(television);
+			res.status(201);
+			res.json(television);
 		};
+		/*
+			Moved this 'next()' inside the save() function. I kept getting
+			an error that I was trying to edit a heading that was already
+			sent. Seemed to be a callback/async problem that I don't yet
+			understand. This fixes that problem although I'm not sure if
+			it is adequate.
+		*/
+		next(); 
 	});
-	next();
 });
 
 module.exports = router;

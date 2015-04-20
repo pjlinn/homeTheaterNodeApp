@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
 var SpeakerInputSchema = new mongoose.Schema({
-	type : String,
-	quantity : Number
+	type: String,
+	quantity: Number
 });
 
-mongoose.exports = SpeakerInputSchema;
+// Export the Schema
+module.exports = SpeakerInputSchema;
