@@ -4,9 +4,13 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Television = require('../models/Television.js');
 
+var query;
+
 // GET /televisions listing
 router.get('/', function(req, res, next) {
-	Television.find(function(err, televisions) {
+	query = Television.find();
+	query.select('-_id -__v');
+	query.exec(function(err, televisions) {
 		if (err) return next(err);
 		res.json(televisions);
 	});
@@ -14,7 +18,7 @@ router.get('/', function(req, res, next) {
 
 // GET /televisions/getOne
 router.get('/getOneLg', function(req, res, next) {
-	var query = Television.findOne({ brand: 'lg' });
+	query = Television.findOne({ brand: 'lg' });
 	
 	query.select('-_id -__v');
 	query.exec(function (err, television) {
@@ -73,6 +77,14 @@ router.post('/', function(req, res, next) {
 			it is adequate.
 		*/
 		next(); 
+	});
+});
+
+router.delete('/', function(req, res, next) {
+	query = Television.remove({});
+	query.exec(function(err) {
+		res.json({status: 'Successfully deleted all televisions'});
+		next();
 	});
 });
 

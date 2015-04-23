@@ -1,8 +1,5 @@
 var mongoose = require('mongoose');
 
-var SpeakerOutputSchema = new mongoose.Schema({
-	type: String,
-	quantity: Number
-});
+var SpeakerOutputSchema = new mongoose.Schema();
 
 mongoose.exports = SpeakerOutputSchema;

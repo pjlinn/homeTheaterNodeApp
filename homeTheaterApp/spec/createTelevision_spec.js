@@ -97,6 +97,28 @@ TEST_TELEVISIONS.forEach(function createTelevision(television, index, array) {
 		.toss()
 });
 
+frisby.create('GET one lg television without the extra properties')
+	.get(URL + '/getOneLg')
+	.expectStatus(200)
+	.expectHeader('Content-type', 'application/json; charset=utf-8')
+	.expectJSON({
+			component: 'television',
+		  	brand: 'lg',
+		  	cost: 1300,
+		  	performance: 5,
+		  	reliability: 0.7,
+		  	height: 30.8,
+		  	width: 50.6,
+		  	thickness: 1.2,
+		  	weight: 48.7,
+		  	inputs: [{ type: 'ac power', quantity: 1 }, 
+		  	{ type: 'hdmi', quantity: 1 },
+		  	{ type: 'video', quantity: 1 }],
+		  	outputs: []		
+	})
+	.toss();
+
+
 // frisby.create('GET lg television')
 // 	.get(URL + '/getOneLg')
 // 	.expectStatus(200)

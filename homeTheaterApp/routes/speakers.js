@@ -4,11 +4,26 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Speaker = require('../models/Speaker.js');
 
+var query;
+
 // GET /speakers
 router.get('/', function(req, res, next) {
-	Speaker.find(function(err, speakers) {
+	query = Speaker.find();
+	query.exec(function(err, speakers) {
 		if (err) return next(err);
 		res.json(speakers);
+		next();
+	});
+});
+
+// GET one /speakers/getOneSony
+router.get('/getOneSony', function(req, res, next) {
+	query = Speaker.findOne({ brand: 'sony' });
+	query.select('-_id -__v');
+	query.exec(function(err, speaker) {
+		if (err) { return err };
+		res.json(speaker);
+		next();
 	});
 });
 
@@ -31,9 +46,9 @@ router.post('/', function(req, res, next) {
 	speaker.powerHandlingMin = req.body.powerHandlingMin;
 	speaker.powerHandlingMax = req.body.powerHandlingMax;
 	speaker.inputs = req.body.inputs;
-	speaker.outputs = req.body.outputs;
+	speaker.outputs = [{}];
 
-	console.log(req.body.inputs);
+	// console.log(req.body.inputs);
 
 	speaker.save(function (err, speakers){
 		if (err) {
@@ -45,6 +60,16 @@ router.post('/', function(req, res, next) {
 			res.json(speaker);
 			// console.log(res.body);
 		};
+		next();
+	});
+});
+
+// DELETE /speakers
+router.delete('/', function(req, res, next) {
+	query = Speaker.remove({});
+	query.exec(function(err) {
+		if (err) return next(err);
+		res.json({ status: 'Speakers have been deleted.' });
 		next();
 	});
 });

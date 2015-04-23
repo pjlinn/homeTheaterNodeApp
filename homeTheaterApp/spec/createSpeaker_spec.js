@@ -4,10 +4,10 @@ TEST_SPEAKERS = [
 		performance:10, reliability: 0.8, powerHandlingMin: 5,
 		powerHandlingMax: 2000,
 		inputs: [
-			{ type: 'speakerRight', quantity: 1},
-			{ type: 'speakerLeft', quantity: 1}
+			{ type: 'speaker-r', quantity: 1},
+			{ type: 'speaker-l', quantity: 1}
 		],
-		outputs: [{}]
+		outputs: []
 	},
 	{
 		component : "speaker", brand : "klipsch", cost : 300,
@@ -16,7 +16,7 @@ TEST_SPEAKERS = [
 		inputs : [
 			{ type : "speaker-r", quantity : 1 },
 			{ type : "speaker-l", quantity : 1 }],
-		outputs : [ ]
+		outputs : []
 	},
 	{
 		component : "speaker", brand : "bose", cost : 328,
@@ -25,7 +25,7 @@ TEST_SPEAKERS = [
 		inputs : [
 			{ type : "speaker-r", quantity : 1 },
 			{ type : "speaker-l", quantity : 1 }],
-		outputs : [ ]
+		outputs : []
 	}
 ];
 
@@ -62,3 +62,21 @@ TEST_SPEAKERS.forEach(function createSpeakers(speaker, index, array) {
 			})
 		.toss()
 });
+
+frisby.create('GET a sony speaker and return non-mongo properties')
+	.get(URL + '/getOneSony')
+	.expectStatus(200)
+	.expectHeader('Content-type', 'application/json; charset=utf-8')
+	.expectJSON({
+		component: 'speaker',
+		brand: 'sony',
+		cost: 1000,
+		performance: 10,
+		reliability: .8,
+		powerHandlingMin: 5,
+		powerHandlingMax: 2000,
+		inputs: [{ type: 'speaker-r', quantity: 1 },
+			{ type: 'speaker-l', quantity: 1 }],
+		outputs: []
+	})
+	.toss();
