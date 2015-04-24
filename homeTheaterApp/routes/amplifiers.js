@@ -4,11 +4,27 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Amplifier = require('../models/Amplifier.js');
 
+var query;
+
 // GET /amplifiers
 router.get('/', function(req, res, next) {
-	Amplifier.find(function(err, televisions) {
-		if (err) return next(err);
-		res.json(televisions);
+	query = Amplifier.find();
+	query.select('-__v -_id');
+	query.exec(function(err, amplifiers) {
+		if (err) { next(err) };
+		res.json(amplifiers);
+		next();
+	});
+});
+
+// GET /amplifier/getOnePolk
+router.get('/getOnePolk', function(req, res, next) {
+	query = Amplifier.findOne({ brand: 'polk' });
+	query.select('-__v -_id');
+	query.exec(function(err, amplifier) {
+		if (err) return err;
+		res.json(amplifier);
+		next();
 	});
 });
 
@@ -50,6 +66,16 @@ router.post('/', function(req, res, next) {
 			res.status(201);
 			res.json(newAmplifier);
 		};
+		next();
+	});
+});
+
+// DELETE /amplifiers
+router.delete('/', function(req, res, next) {
+	query = Amplifier.remove({});
+	query.exec(function(err) {
+		if (err) return err;
+		res.json({ status: 'All amplifiers have been deleted.'})
 		next();
 	});
 });

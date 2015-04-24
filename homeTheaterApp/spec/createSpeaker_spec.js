@@ -32,6 +32,15 @@ TEST_SPEAKERS = [
 var frisby = require('../node_modules/frisby');
 var URL = 'http://localhost:3000/speakers';
 
+frisby.create('DELETE all speakers')
+	.delete(URL)
+	.expectStatus(200)
+	.expectHeader('Content-type', 'application/json; charset=utf-8')
+	.expectJSON(
+		{ status: 'Speakers have been deleted.'}
+	)
+	.toss();
+
 TEST_SPEAKERS.forEach(function createSpeakers(speaker, index, array) {
 	frisby.create('POST create speaker ' + speaker.brand)
 		.post(URL,

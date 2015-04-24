@@ -63,6 +63,15 @@ var outputSchema = {
 	quantity: Number
 };
 
+frisby.create('DELETE all televisions')
+	.delete(URL)
+	.expectStatus(200)
+	.expectHeader('Content-type', 'application/json; charset=utf-8')
+	.expectJSON({
+		status: 'Successfully deleted all televisions'
+	})
+	.toss();
+
 TEST_TELEVISIONS.forEach(function createTelevision(television, index, array) {
 	frisby.create('POST create television ' + television.brand)
 		.post(URL,
