@@ -123,62 +123,8 @@ frisby.create('GET one lg television without the extra properties')
 		  	inputs: [{ type: 'ac power', quantity: 1 }, 
 		  	{ type: 'hdmi', quantity: 1 },
 		  	{ type: 'video', quantity: 1 }],
-		  	outputs: []		
+		  	outputs: [{ type: 'audio-l', quantity: 1 },
+		  	{ type: 'audio-r', quantity: 1},
+		  	{ type: 'headphones', quantity: 1}]
 	})
 	.toss();
-
-
-// frisby.create('GET lg television')
-// 	.get(URL + '/getOneLg')
-// 	.expectStatus(200)
-// 	.expectJSONTypes({
-// 		component: String,
-// 		brand: String,
-// 		cost: Number,
-// 		performance: Number,
-// 		reliability: Number,
-// 		height: Number,
-// 		width: Number,
-// 		thickness: Number,
-// 		weight: Number,
-// 		inputs: [inputSchema],
-// 		outputs: [outputSchema]
-// 	})
-// 	.expectJSON({
-// 		component: 'television',
-// 		brand: 'lg',
-// 		cost: 1300,
-// 		performance: 5,
-// 		reliability: 0.7,
-// 		height: 30.8,
-// 		width: 50.6,
-// 		thickness: 1.2,
-// 		weight: 48.7,
-// 		inputs: [
-// 			{
-// 				type: 'ac power',
-// 				quantity: 1
-// 			},
-// 			{
-// 				type: 'hdmi',
-// 				quantity: 1
-// 			},
-// 			{
-// 				type: 'video',
-// 				quantity: 1
-// 			}],
-// 		outputs: [
-// 			{
-// 				type: 'audio-l',
-// 				quantity: 1
-// 			},
-// 			{
-// 				type: 'audio-r',
-// 				quantity: 1
-// 			}, 
-// 			{
-// 				type: 'headphones',
-// 				quantity: 1
-// 			}]
-// 	})
-// 	.toss()

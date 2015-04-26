@@ -27,6 +27,15 @@ router.get('/getOneLg', function(req, res, next) {
 	});
 });
 
+// GET /televisions/:id
+router.get('/:id', function(req, res, next) {
+	Television.findById(req.params.id, function(err, television) {
+		if (err) return err;
+		res.json(television);
+		next();
+	});
+});
+
 // POST /televisions listing
 router.post('/', function(req, res, next) {
 
@@ -48,17 +57,6 @@ router.post('/', function(req, res, next) {
 	television.weight = req.body.weight;
 	television.inputs = req.body.inputs;
 	television.outputs = req.body.outputs;
-	// Not really necessary to add the inputs/outputs like this
-	// var inputs  = req.body.inputs;
-	// var outputs = req.body.outputs;
-
-	// inputs.forEach(function postInput(input, index, array) {
-	// 	television.inputs.push(input);
-	// });
-
-	// outputs.forEach(function postOutput(output, index, array) {
-	// 	television.outputs.push(output);
-	// });
 
 	television.save(function (err, televisions) {
 		if (err) {
@@ -80,6 +78,16 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+// PUT /televisions/:id
+router.put('/:id', function(req, res, next) {
+	Television.findByIdAndUpdate(req.params.id, { brand: req.body.brand }, function(err, update) {
+		if (err) return err;
+		res.json(update);
+		next();
+	});
+});
+
+// DELETE /televisions
 router.delete('/', function(req, res, next) {
 	query = Television.remove({});
 	query.exec(function(err) {

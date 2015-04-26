@@ -27,6 +27,15 @@ router.get('/getOneSony', function(req, res, next) {
 	});
 });
 
+// GET /speakers/:id
+router.get('/:id', function(req, res, next) {
+	Speaker.findById(req.params.id, function(err, speaker) {
+		if (err) return err;
+		res.json(speaker);
+		next();
+	});
+});
+
 // POST /speakers
 router.post('/', function(req, res, next) {
 
@@ -60,6 +69,15 @@ router.post('/', function(req, res, next) {
 			res.json(speaker);
 			// console.log(res.body);
 		};
+		next();
+	});
+});
+
+// PUT /speakers/:id
+router.put('/:id', function(req, res, next) {
+	Speaker.findByIdAndUpdate(req.params.id, { brand: req.body.brand }, function(err, updatedSpeaker) {
+		if (err) return err;
+		res.json(updatedSpeaker);
 		next();
 	});
 });

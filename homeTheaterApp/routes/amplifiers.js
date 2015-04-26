@@ -28,6 +28,15 @@ router.get('/getOnePolk', function(req, res, next) {
 	});
 });
 
+// GET /amplifiers/:id
+router.get('/:id', function(req, res, next) {
+	Amplifier.findById(req.params.id, function(err, amplifier) {
+		if (err) return err;
+		res.json(amplifier);
+		next();
+	});
+});
+
 // POST /amplifiers
 router.post('/', function(req, res, next) {
 
@@ -46,17 +55,6 @@ router.post('/', function(req, res, next) {
 	amplifier.inputs = req.body.inputs; // forEach not necessary when set directly equal to the array
 	amplifier.outputs = req.body.outputs; // in television I just used [] here and then pushed
 
-	// var inputs = req.body.inputs;
-	// var outputs = req.body.outputs;
-
-	// inputs.forEach(function postInput(input, index, array) {
-	// 	amplifier.inputs.push(input);
-	// });
-
-	// outputs.forEach(function postOutput(output, index, array) {
-	// 	amplifier.outputs.push(output);
-	// });
-
 	amplifier.save(function (err, newAmplifier) {
 		if (err) {
 			console.log("Mongoose error creating a new amplifier.");
@@ -66,6 +64,15 @@ router.post('/', function(req, res, next) {
 			res.status(201);
 			res.json(newAmplifier);
 		};
+		next();
+	});
+});
+
+// PUT /amplifiers/:id
+router.put('/:id', function(req, res, next) {
+	Amplifier.findByIdAndUpdate(req.params.id, { brand: req.body.brand }, function(err, updatedAmplifier) {
+		if (err) return err;
+		res.json(updatedAmplifier);
 		next();
 	});
 });
