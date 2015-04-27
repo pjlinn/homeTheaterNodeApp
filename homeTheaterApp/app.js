@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var televisions = require('./routes/televisions.js');
 var amplifiers = require('./routes/amplifiers.js');
 var speakers = require('./routes/speakers.js');
+var components = require('./routes/components.js');
 
 mongoose.connect('mongodb://localhost/homeTheaterDb', function(err) {
 	if (err) {
@@ -38,5 +39,6 @@ app.post('/*', function(req, res, next) {
 app.use('/televisions', televisions);
 app.use('/amplifiers', amplifiers);
 app.use('/speakers', speakers);
+app.use('/components', components);
 
 module.exports = app;
