@@ -1,0 +1,11 @@
+/* Sets everything in the body down 50px*/
+body {
+	padding-top: 50px;
+	text-align: center;
+}
+
+/* Set a div id="requirements" to apply this style*/
+#requirements {
+	text-align: center;
+	padding-left: 20px;
+}

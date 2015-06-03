@@ -1,0 +1,16 @@
+{
+	"name": "homeTheaterApp",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "node ./server/bin/www"
+	},
+	"dependencies": {
+		"express": "~4.12.0",
+		"debug": "~2.1.1",
+		"mongoose": "~3.8.24",
+		"frisby": "*",
+		"body-parser": "*", // Used for the req.body posting and other stuff
+		"multer": "*" // Used for posting too, but also other stuff
+	}
+}

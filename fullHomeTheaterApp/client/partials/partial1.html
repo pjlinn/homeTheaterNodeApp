@@ -1,0 +1,51 @@
+<div id="requirements">
+		
+	<h4> Please slect your axes for design comparison and then click <span style="color:red">"Graph It!" </span></h4>
+	<h6> (Hover over a point on the graph to show the system deisgn) </h6>
+
+	<!-- Drop downs for property selection -->
+	<label> X-Axis Variable </label>
+	<select>
+		<option> Cost </option>
+		<option> Performance </option>
+		<option> Reliability </option>
+	</select>
+
+	<label> Y-Axis Variable </label>
+	<select>
+		<option> Cost </option>
+		<option> Performance </option>
+		<option> Reliability </option>
+	</select>
+
+	<button class="btn btn-primary"> Graph It! </button>
+
+</div>
+
+
+<!-- Where the D3 graph visualization will go -->
+<div id="canvas"> 
+	{{test}}
+</div>
+
+<!--  Table of Designs -->
+<div class="container">
+	<div>
+		<table class="table table-striped table-hover" border=1>
+			<thead>
+				<tr>
+					<th> Design Name </th>
+					<th> Television </th>
+					<th> Speaker </th>
+					<th> Amplifier </th>
+					<th> Cost </th>
+					<th> Performance </th>
+					<th> Reliability </th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+	</div>
+</div>
