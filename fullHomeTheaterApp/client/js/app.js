@@ -3,19 +3,20 @@
 var app = angular.module('homeTheaterApp', [
 	'ngRoute',
 	'homeTheaterApp.controllers',
-	'homeTheaterApp.directives'
+	'homeTheaterApp.directives',
+	'homeTheaterApp.services'
 	]).
 	config(['$routeProvider', function($routeProvider) { 
 		$routeProvider.when('/view1', 
 		{
-			templateUrl: 'partials/partial1.html',
-			controllers: 'MainCtrl'
+			templateUrl: '/client/partials/partial1.html',
+			controller: 'MainCtrl'
 		}
 	);
-		$routeProvider.when('view2', 
+		$routeProvider.when('/view2', 
 		{
-			templateUrl: 'partials/partial2.html',
-			controllers: 'MainCtrl'
+			templateUrl: '/client/partials/partial2.html',
+			controller: 'ctrl2'
 		}
 	);
 		$routeProvider.otherwise(

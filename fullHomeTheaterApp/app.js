@@ -30,18 +30,6 @@ app.get('/televisions', function(req, res, next) {
 	next();
 });
 
-// app.get('/home', function(req, res, next) {
-// 	res.send('wut');
-// 	res.sendFile(__dirname + '/client/index.html', function(err) {
-// 		if (err) {
-// 			console.log(err);
-// 			res.status(err.status).end();
-// 		} else {
-// 			console.log('Sent: it');
-// 		}
-// 	});
-// });
-
 // POST -- same note as above
 // what's the difference between app. and router.?
 app.post('/*', function(req, res, next) {
@@ -49,6 +37,10 @@ app.post('/*', function(req, res, next) {
 	next();
 });
 
+// Was getting errors trying to link/src static files in my index.html file
+// Had to add this line to express, identify the folder they were in
+// and then append the dir before the paths in index.html
+app.use('/client', express.static(__dirname + '/client'));
 app.use('/televisions', televisions);
 app.use('/amplifiers', amplifiers);
 app.use('/speakers', speakers);

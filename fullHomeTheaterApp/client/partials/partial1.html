@@ -18,14 +18,20 @@
 		<option> Reliability </option>
 	</select>
 
-	<button class="btn btn-primary"> Graph It! </button>
+	<button class="btn btn-primary" ng-click="create"> Graph It! </button>
 
 </div>
 
-
 <!-- Where the D3 graph visualization will go -->
 <div id="canvas"> 
-	{{test}}
+	<h1>WUT......{{test}}</h1>
+
+
+	<ul ng-repeat='television in televisions'> {{television.brand}}</ul>
+	<ul ng-repeat='amplifier in amplifiers'>{{amplifier.brand}}</ul>
+	<!-- <ul ng-repeat='speaker in speakers'>{{speaker}}</ul> -->
+	<ul ng-repeat='speaker in speakers'>{{speaker.brand}} speaker is {{speaker.cost | currency}}</ul>
+
 </div>
 
 <!--  Table of Designs -->
