@@ -26,11 +26,12 @@
 <div id="canvas"> 
 	<h1>WUT......{{test}}</h1>
 
+	<ul> {{televisions.brand}}</ul>
+	<ul>{{amplifiers.brand}}</ul>
+	<ul>{{speakers.brand}} speaker is {{speakers.cost | currency}}</ul>
+	<ul ng-repeat='component in components'> {{component.brand}} {{component.component}} is {{component.cost | currency}}</ul>
 
-	<ul ng-repeat='television in televisions'> {{television.brand}}</ul>
-	<ul ng-repeat='amplifier in amplifiers'>{{amplifier.brand}}</ul>
-	<!-- <ul ng-repeat='speaker in speakers'>{{speaker}}</ul> -->
-	<ul ng-repeat='speaker in speakers'>{{speaker.brand}} speaker is {{speaker.cost | currency}}</ul>
+	<ng-d3-chart list-of-components='televisions'></ng-d3-chart>
 
 </div>
 

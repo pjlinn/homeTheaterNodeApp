@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 
+var componentInputSchema = require('./ComponentInputSchema');
+var componentOutputSchema = require('./ComponentOutputSchema')
+
 var componentSchema = new mongoose.Schema({
 	component: String,
 	brand: String,
@@ -13,8 +16,8 @@ var componentSchema = new mongoose.Schema({
 	powerHandling: Number,
 	powerHandlingMin: Number,
 	powerHandlingMax: Number,
-	inputs: [],
-	outputs: []
+	inputs: [componentInputSchema],
+	outputs: [componentOutputSchema]
 });
 
 module.exports = mongoose.model('Component', componentSchema);

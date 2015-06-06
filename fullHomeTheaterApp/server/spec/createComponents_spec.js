@@ -122,6 +122,9 @@ TEST_COMPONENTS = [
 
 var frisby = require('../node_modules/frisby')
 var URL = 'http://localhost:3000/components';
+var urlTelevision = URL + '/television';
+var urlAmplifier = URL + '/amplifier';
+var urlSpeaker = URL + '/speaker';
 
 frisby.create('DELETE all components')
 	.delete(URL)
@@ -154,3 +157,63 @@ TEST_COMPONENTS.forEach(function createComponent(component, index, array) {
 	.expectHeader('Content-type', 'application/json; charset=utf-8')
 	.toss()
 });
+
+frisby.create('GET a speaker using the params')
+	.get(urlSpeaker)
+	.expectStatus(200)
+	.expectHeader('Content-type', 'application/json; charset=utf-8')
+	.expectJSON({
+		component: 'speaker',
+		brand: 'sony',
+		cost: 1000,
+		performance: 10,
+		reliability: .8,
+		powerHandlingMin: 5,
+		powerHandlingMax: 2000,
+		inputs: [{ type: 'speaker-r', quantity: 1 },
+			{ type: 'speaker-l', quantity: 1 }],
+		outputs: []		
+	})
+	.toss();
+
+frisby.create('GET a television using the params')
+	.get(urlTelevision)
+	.expectStatus(200)
+	.expectHeader('Content-type', 'application/json; charset=utf-8')
+	.expectJSON({
+		component: 'television',
+	  	brand: 'lg',
+	  	cost: 1300,
+	  	performance: 5,
+	  	reliability: 0.7,
+	  	height: 30.8,
+	  	width: 50.6,
+	  	thickness: 1.2,
+	  	weight: 48.7,
+	  	inputs: [{ type: 'ac power', quantity: 1 }, 
+	  	{ type: 'hdmi', quantity: 1 },
+	  	{ type: 'video', quantity: 1 }],
+	  	outputs: [{ type: 'audio-l', quantity: 1 },
+	  	{ type: 'audio-r', quantity: 1},
+		{ type: 'headphones', quantity: 1}]		
+	})
+	.toss();
+
+frisby.create('GET an amplifier using the params')
+	.get(urlAmplifier)
+	.expectStatus(200)
+	.expectHeader('Content-type', 'application/json; charset=utf-8')
+	.expectJSON({
+		component: 'amplifier',
+		brand: 'bose',
+		cost: 300,
+		performance: 10,
+		reliability: .8,
+		powerHandling: 100,
+		inputs: [{ type: 'ac power', quantity: 1 },
+		{ type: 'audio-l', quantity: 1 },
+		{ type: 'audio-r', quantity: 1 }],
+		outputs: [{ type: 'speaker-l', quantity: 1 },
+		{ type: 'speaker-r', quantity: 1 }]		
+	})
+	.toss();

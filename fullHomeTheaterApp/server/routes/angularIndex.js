@@ -3,8 +3,6 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-	// res.send('wut wut');
-	// path.resolve('../../')
 	res.sendFile('/index.html', { root: './client'} , function(err) {
 		if (err) {
 			console.log(err);

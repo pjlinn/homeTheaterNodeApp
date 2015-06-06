@@ -37,9 +37,10 @@ app.post('/*', function(req, res, next) {
 	next();
 });
 
-// Was getting errors trying to link/src static files in my index.html file
-// Had to add this line to express, identify the folder they were in
-// and then append the dir before the paths in index.html
+/* Was getting errors trying to link/src static files in my index.html file
+   Had to add this line to express, identify the folder they were in
+   and then append the dir before the paths in index.html
+*/
 app.use('/client', express.static(__dirname + '/client'));
 app.use('/televisions', televisions);
 app.use('/amplifiers', amplifiers);

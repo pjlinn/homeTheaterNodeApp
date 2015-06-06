@@ -17,6 +17,24 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+/*
+	GET with paramters
+*/
+
+// GET /components/:component
+router.get('/:component', function(req, res, next) {
+	var component = req.params.component;
+
+	query = Component.where({ component: component });
+	query.findOne();
+	query.select('-__v -_id');
+	query.exec(function(err, components) {
+		if (err) return err;
+		res.json(components);
+		next();
+	});
+});
+
 // POST /components
 router.post('/', function(req, res, next) {
 	var component = new Component;
