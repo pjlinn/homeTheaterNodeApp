@@ -6,6 +6,9 @@ controllers.controller('MainCtrl', [
 	'$scope', '$http', 'Televisions', 'Amplifiers', 'Speakers', 'Components',
 	function($scope, $http, Televisions, Amplifiers, Speakers, Components) {
 		$scope.test = 'Hello World';
+		$scope.alert = function() {
+			alert('working?');
+		};
 
 		/* 
 			Function holder. It's logic is defined in a directive

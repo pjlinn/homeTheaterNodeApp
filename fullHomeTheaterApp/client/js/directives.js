@@ -21,39 +21,6 @@ directives.directive('ngD3Chart', function() {
 		height = 300 - margin.top - margin.bottom,
 		width = 1400 - margin.left - margin.right;
 
-	var tooltip = d3.select("#canvas")
-		.append("div")
-			.attr("class", "tooltip")
-			.style("opacity", 0);
-
-	var x = d3.scale.linear().range([0, width]);
-	var y = d3.scale.linear().range([height, 0]);
-
-	var xAxis = d3.svg.axis().scale(x)
-		.orient("bottom");
-	var yAxis = d3.svg.axis().scale(y)
-		.orient("left");
-
-	var svg = d3.select("#canvas")
-		.append("svg")
-			.attr("width", width + margin.left + margin.right)
-			.attr("height", height + margin.top + margin.bottom)
-		.append("g")
-			.attr("transform", "translate(" + margin.left + "," + margin.top +")");
-
-	svg.append("g")
-			.attr("class", "xAxis")
-			.attr("transform", "translate(0, " + height + ")");
-
-	svg.append("g")
-			.attr("class", "yAxis");
-
-	svg.append("text")
-		.attr("class", "xLabel");
-
-	svg.append("text")
-		.attr("class", "yLabel");
-
 	return {
 		restrict: 'AE',
 		replace: false,
@@ -63,6 +30,39 @@ directives.directive('ngD3Chart', function() {
 			systemDesigns: '='
 		},
 		link: function(scope, element, attrs) {
+
+			var tooltip = d3.select("#canvas")
+				.append("div")
+					.attr("class", "tooltip")
+					.style("opacity", 0);
+
+			var x = d3.scale.linear().range([0, width]);
+			var y = d3.scale.linear().range([height, 0]);
+
+			var xAxis = d3.svg.axis().scale(x)
+				.orient("bottom");
+			var yAxis = d3.svg.axis().scale(y)
+				.orient("left");
+
+			var svg = d3.select("#canvas")
+				.append("svg")
+					.attr("width", width + margin.left + margin.right)
+					.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+					.attr("transform", "translate(" + margin.left + "," + margin.top +")");
+
+			svg.append("g")
+					.attr("class", "xAxis")
+					.attr("transform", "translate(0, " + height + ")");
+
+			svg.append("g")
+					.attr("class", "yAxis");
+
+			svg.append("text")
+				.attr("class", "xLabel");
+
+			svg.append("text")
+				.attr("class", "yLabel");
 
 			function visualizeIt() {
 			
