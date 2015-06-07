@@ -1,44 +1,37 @@
-<div id="requirements">
+<div id="requirements" ng-build-systems components="components" system-designs="systemDesigns">
 		
 	<h4> Please slect your axes for design comparison and then click <span style="color:red">"Graph It!" </span></h4>
 	<h6> (Hover over a point on the graph to show the system deisgn) </h6>
 
 	<!-- Drop downs for property selection -->
 	<label> X-Axis Variable </label>
-	<select>
-		<option> Cost </option>
-		<option> Performance </option>
-		<option> Reliability </option>
+	<select ng-model="xVariable" ng-options="value.name for value in axisValues">
 	</select>
 
 	<label> Y-Axis Variable </label>
-	<select>
-		<option> Cost </option>
-		<option> Performance </option>
-		<option> Reliability </option>
-	</select>
+	<select ng-model="yVariable" ng-options="value.name for value in axisValues"></select>
 
-	<button class="btn btn-primary" ng-click="create"> Graph It! </button>
+	<button class="btn btn-primary" id="visualizeBtn" > Graph It! </button>
 
 </div>
 
 <!-- Where the D3 graph visualization will go -->
 <div id="canvas"> 
-	<h1>WUT......{{test}}</h1>
+<!-- 	<h1>WUT......{{test}}</h1>
 
 	<ul> {{televisions.brand}}</ul>
 	<ul>{{amplifiers.brand}}</ul>
-	<ul>{{speakers.brand}} speaker is {{speakers.cost | currency}}</ul>
-	<ul ng-repeat='component in components'> {{component.brand}} {{component.component}} is {{component.cost | currency}}</ul>
+	<ul>{{speakers.brand}} speaker is {{speakers.cost | currency}}</ul> -->
+	<!-- <ul ng-repeat='component in components'> {{component.brand}} {{component.component}} is {{component.cost | currency}}</ul> -->
 
-	<ng-d3-chart list-of-components='televisions'></ng-d3-chart>
+	<ng-d3-chart components='{{components}}' option-x="xVariable" option-y="yVariable" system-designs="systemDesigns"></ng-d3-chart>
 
 </div>
 
 <!--  Table of Designs -->
 <div class="container">
 	<div>
-		<table class="table table-striped table-hover" border=1>
+		<table class="table table-striped table-hover" border=1 id="designsTable">
 			<thead>
 				<tr>
 					<th> Design Name </th>
