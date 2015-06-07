@@ -3,25 +3,8 @@
 var controllers = angular.module('homeTheaterApp.controllers', []);
 
 controllers.controller('MainCtrl', [
-	'$scope', '$http', 'Televisions', 'Amplifiers', 'Speakers', 'Components',
-	function($scope, $http, Televisions, Amplifiers, Speakers, Components) {
-		$scope.test = 'Hello World';
-		$scope.alert = function() {
-			alert('working?');
-		};
-
-		/* 
-			Function holder. It's logic is defined in a directive
-		 	I think I'm supposed to keep the ctrl fairly clean
-			I'm also not sure how to call a function defined in a
-			directive. I'd have to move the button inside the 
-			directive so that it would inherit the directives scope.
-			I don't want to do that, however. So I will bind the
-			directive to this function and define it there and have
-			the button call it.
-		*/
-		// $scope.visualizeIt = function() { console.log('controller...')};
-
+	'$scope', 'Televisions', 'Amplifiers', 'Speakers', 'Components',
+	function($scope, Televisions, Amplifiers, Speakers, Components) {
 		/*
 			Different ways to use services and parameters. I can define
 			parameters in the service, or the query call. Since this is
@@ -45,19 +28,12 @@ controllers.controller('MainCtrl', [
 			{ name:'Reliability', value:'reliability', index: 2}
 		];
 
+		$scope.tableHeaders = ['Design Name', 'Television', 'Speaker',
+		'Amplifier', 'Cost', 'Performance', 'Reliability'];
+
 		$scope.xVariable = $scope.axisValues[0];
 		$scope.yVariable = $scope.axisValues[1];
 
 		$scope.systemDesigns = [];
-
-
-		// $http.get('/televisions/')
-		// 	.success(function(data) {
-		// 		$scope.televisions = data;
-		// 		console.log(data);
-		// 	})
-		// 	.error(function(data) {
-		// 		console.log('Error: ' + data);
-		// 	});
 	}
 ]);

@@ -16,8 +16,8 @@ directives.directive('ngWelcome', function() {
 });
 
 directives.directive('ngD3Chart', function() {
-	
-	var margin = {left: 75, right: 20, top: 30, bottom: 50},
+
+	var margin = {left: 75, right: 300, top: 30, bottom: 50},
 		height = 300 - margin.top - margin.bottom,
 		width = 1400 - margin.left - margin.right;
 
