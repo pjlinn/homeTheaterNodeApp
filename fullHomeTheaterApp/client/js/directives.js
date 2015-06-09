@@ -15,6 +15,9 @@ directives.directive('ngWelcome', function() {
 	}
 });
 
+
+// Allocates space and draws the graph. Uses components build in
+// the other directive.
 directives.directive('ngD3Chart', function() {
 
 	var margin = {left: 75, right: 300, top: 30, bottom: 50},
@@ -132,7 +135,8 @@ directives.directive('ngD3Chart', function() {
 
 
 
-
+// Algorithm to build the components. Probably not ideal how
+// I break up the logic.
 directives.directive('ngBuildSystems', function() {
 
 	return {
@@ -143,8 +147,6 @@ directives.directive('ngBuildSystems', function() {
 			systemDesigns: '='
 		},
 		link: function(scope, element, attrs) {
-
-			// console.log(scope.components);
 
 			function buildSystemDesigns(components) {
 

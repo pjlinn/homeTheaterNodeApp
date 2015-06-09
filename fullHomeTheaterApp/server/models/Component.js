@@ -1,3 +1,13 @@
+/*
+	Component model for televisions, amplifiers, and
+	speakers. Uses additional model created for
+	the imbedded objects.
+
+	Needed a components collection to query for
+	individual component types. I was using
+	a collection for each before.
+*/
+
 var mongoose = require('mongoose');
 
 var componentInputSchema = require('./ComponentInputSchema');

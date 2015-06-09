@@ -1,5 +1,13 @@
 'use strict'
 
+/*
+	Calls the services and attaches the 
+	data to the scope for the attached view. Also,
+	creates values for options, tableheaders, etc.
+
+	Makes the index.html cleaner.
+*/
+
 var controllers = angular.module('homeTheaterApp.controllers', []);
 
 controllers.controller('MainCtrl', [

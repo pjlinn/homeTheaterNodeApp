@@ -1,12 +1,19 @@
+/*
+	This file connects to the mongo database and
+	takes in all the different server api routes.
+*/
+
 var express = require('./server/node_modules/express');
 var mongoose = require('./server/node_modules/mongoose');
 
+// API routes
 var televisions = require('./server/routes/televisions.js');
 var amplifiers = require('./server/routes/amplifiers.js');
 var speakers = require('./server/routes/speakers.js');
 var components = require('./server/routes/components.js');
 var angularIndex = require('./server/routes/angularIndex');
 
+// Connect to DB
 mongoose.connect('mongodb://localhost/homeTheaterDb', function(err) {
 	if (err) {
 		console.log('connection error', err);

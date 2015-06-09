@@ -4,14 +4,34 @@
 	<h6> (Hover over a point on the graph to show the system deisgn) </h6>
 
 	<!-- Drop downs for property selection -->
-	<label> X-Axis Variable </label>
-	<select ng-model="xVariable" ng-options="value.name for value in axisValues">
-	</select>
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-3">
+			<label for="yVariableSelect"> Y-Axis Variable </label>
+		</div>
 
-	<label> Y-Axis Variable </label>
-	<select ng-model="yVariable" ng-options="value.name for value in axisValues"></select>
+		<div class="col-sm-3">
+			<label for="xVariableSelect"> X-Axis Variable </label>
+		</div>			
+		<div class="col-sm-3"></div>
+	</div>	
 
-	<button class="btn btn-primary" id="visualizeBtn" > Graph It! </button>
+	<form id="axisSelectForm">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3 form-group">
+				<select class="form-control" ng-model="yVariable" ng-options="value.name for value in axisValues" id="yVariableSelect"></select>
+			</div>
+
+			<div class="col-sm-3 form-group">
+				<select class="form-control" align="center" ng-model="xVariable" ng-options="value.name for value in axisValues" id="xVariableSelect">
+				</select>
+			</div>			
+			<div class="col-sm-3 form-group" align="left">
+				<button class="btn btn-primary " id="visualizeBtn" > Graph It! </button>
+			</div>
+		</div>
+	</form>
 
 </div>
 

@@ -1,5 +1,12 @@
 'use strict';
 
+/*
+	Where we attach views to controllers. Also,
+	load the different files and dependencies.
+
+	App is named here and loaded in index.html
+*/
+
 var app = angular.module('homeTheaterApp', [
 	'ngRoute',
 	'homeTheaterApp.controllers',

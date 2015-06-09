@@ -1,3 +1,7 @@
+/*
+	Schema for outputs. 
+*/
+
 var mongoose = require('mongoose');
 
 var ComponentOutputSchema = new mongoose.Schema({

@@ -1,3 +1,8 @@
+/*
+	API routes for the components. These
+	are consumed by the Angular front-end.
+*/
+
 var express = require('express');
 var router = express.Router();
 

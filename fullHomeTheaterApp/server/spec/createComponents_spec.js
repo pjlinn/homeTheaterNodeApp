@@ -7,11 +7,12 @@
 	404 - "404 Not Found"
 */
 /*
+	To run: jasmine-node createComponents.spec
 
-	TO-DO: Write out what the test is supposed to accomplish and how
-	to run it for my own reference. I've already forgotten. This
-	includes expected outcome!
-
+	DELETE all components in DB
+	POST a component from TEST_COMPONENTS
+	GET a speaker to test the POST
+	
 */
 
 TEST_COMPONENTS = [

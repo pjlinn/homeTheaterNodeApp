@@ -1,3 +1,8 @@
+/*
+	API route that feeds the angular index file when
+	going to the app home page.
+*/
+
 var path = require('path');
 var express = require('express');
 var router = express.Router();

@@ -1,8 +1,10 @@
 /*
 
-	TO-DO: Write out what the test is supposed to accomplish and how
-	to run it for my own reference. I've already forgotten. This
-	includes expected outcome!
+	To run: jasmine-node updateAmplifier....spec
+
+	PUT new information for an existing amplifier
+
+	*Fails because the fixed id doesn't exist
 
 */
 

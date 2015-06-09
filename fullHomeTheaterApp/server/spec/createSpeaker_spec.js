@@ -1,8 +1,10 @@
 /*
 
-	TO-DO: Write out what the test is supposed to accomplish and how
-	to run it for my own reference. I've already forgotten. This
-	includes expected outcome!
+	To run: jasmine-node createSpeaker_spec.js
+
+	DELETE all speakers in the DB
+	POST each of the TEST_SPEAKERS to the DB
+	GET one to check that it worked
 
 */
 

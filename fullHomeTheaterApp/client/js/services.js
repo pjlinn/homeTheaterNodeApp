@@ -1,5 +1,9 @@
 'use strict'
 
+/*
+	Angular queries to the API routes I set up on the server side.
+*/
+
 var services = angular.module('homeTheaterApp.services', ['ngResource']);
 
 services.factory('Televisions', ['$resource', function($resource) {

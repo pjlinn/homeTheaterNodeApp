@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
+/*
+  This file came with the scaffolding that I used.
+  express-generator I think.
+  Pretty sure I didn't do anything with it. It
+  sets up the node server.
+*/
+
 /**
  * Module dependencies.
  */

@@ -1,8 +1,10 @@
 /*
 
-	TO-DO: Write out what the test is supposed to accomplish and how
-	to run it for my own reference. I've already forgotten. This
-	includes expected outcome!
+	To run: jasmine-node createAmplifier.spec
+
+	DELETES all the amplifiers.
+	POSTS the TEST_AMPLIFIERS
+	GETS an amplifier to test
 
 */
 
