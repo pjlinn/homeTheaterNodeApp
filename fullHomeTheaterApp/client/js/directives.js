@@ -139,12 +139,23 @@ directives.directive('ngD3Chart', function() {
 // I break up the logic.
 directives.directive('ngBuildSystems', function() {
 
+	// var columnDefs = [
+ //  	    { displayName: "Design Name", field: "designName" },
+	// 	{ displayName: "Television", field: "television"},
+	// 	{ displayName: "Speaker", field: "speaker" },
+	// 	{ displayName: "Amplifier", field: "amplifier" },
+	// 	{ displayName: 'Cost', field: 'cost' },
+	// 	{ displayName: 'Performance', field: 'performance' },
+	// 	{ displayName: 'Reliability', field: 'reliability' }
+	// ];
+
 	return {
 		restrict: 'A',
 		replace: false,
 		scope: {
 			components: '=',
-			systemDesigns: '='
+			systemDesigns: '=',
+			gridOptions: '='
 		},
 		link: function(scope, element, attrs) {
 
@@ -219,16 +230,22 @@ directives.directive('ngBuildSystems', function() {
 					};
 				};
 
-				scope.systemDesigns.forEach(function(x) {
-					$("#designsTable").append("<tr><td>" + 
-						x.name + "</td><td>" + 
-						x.television + "</td><td>" + 
-						x.speaker + "</td><td>" + 
-						x.amplifier + "</td><td>"+
-						x.cost + "</td><td>" +
-						x.performance.toFixed(2) + "</td><td>" +
-						x.reliability.toFixed(2) +	"</td></tr>");
-				});
+				// scope.systemDesigns.forEach(function(sysDesign) {
+				// 	scope.gridOptions.api.setRows(sysDesign);
+				// });
+				scope.gridOptions.rowData = scope.systemDesigns;
+				scope.gridOptions.api.onNewRows();
+
+				// scope.systemDesigns.forEach(function(x) {
+				// 	$("#designsTable").append("<tr><td>" + 
+				// 		x.name + "</td><td>" + 
+				// 		x.television + "</td><td>" + 
+				// 		x.speaker + "</td><td>" + 
+				// 		x.amplifier + "</td><td>"+
+				// 		x.cost + "</td><td>" +
+				// 		x.performance.toFixed(2) + "</td><td>" +
+				// 		x.reliability.toFixed(2) +	"</td></tr>");
+				// });
 			};
 
 			scope.$watch('components', function(newVal, oldVal) {

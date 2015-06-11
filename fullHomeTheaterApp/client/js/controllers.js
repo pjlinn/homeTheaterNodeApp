@@ -43,5 +43,24 @@ controllers.controller('MainCtrl', [
 		$scope.yVariable = $scope.axisValues[1];
 
 		$scope.systemDesigns = [];
+
+		// field has to match the object property being loaded in 
+		var columnDefs = [
+	  	    { displayName: "Design Name", field: "name", width: 100},
+    		{ displayName: "Television", field: "television", width: 100 },
+    		{ displayName: "Speaker", field: "speaker", width: 100 },
+    		{ displayName: "Amplifier", field: "amplifier" },
+    		{ displayName: 'Cost', field: 'cost', valueGetter: 'data.cost.toFixed(2)' },
+    		{ displayName: 'Performance', field: 'performance', valueGetter: 'data.performance.toFixed(2)' },
+    		{ displayName: 'Reliability', field: 'reliability', valueGetter: 'data.reliability.toFixed(2)' }
+		];
+
+		$scope.gridOptions = {
+			columnDefs: columnDefs,
+			rowData: null,
+			enableSorting: true,
+			dontUseScrolls: true,
+			rowSelection: 'single'
+		};
 	}
 ]);

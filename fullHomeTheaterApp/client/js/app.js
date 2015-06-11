@@ -9,6 +9,7 @@
 
 var app = angular.module('homeTheaterApp', [
 	'ngRoute',
+	'angularGrid',
 	'homeTheaterApp.controllers',
 	'homeTheaterApp.directives',
 	'homeTheaterApp.services'

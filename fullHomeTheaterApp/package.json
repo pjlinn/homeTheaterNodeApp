@@ -10,7 +10,7 @@
 		"debug": "~2.1.1",
 		"mongoose": "~3.8.24",
 		"frisby": "*",
-		"body-parser": "*", // Used for the req.body posting and other stuff
-		"multer": "*" // Used for posting too, but also other stuff
+		"body-parser": "*",
+		"multer": "*" 
 	}
 }

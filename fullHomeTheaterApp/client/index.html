@@ -6,6 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="/client/css/style.css">
 	<!-- Pulling bootstrap css file (put in my css folder) -->
 	<link rel="stylesheet" type="text/css" href="/client/css/bootstrap.css">
+	<!-- Angular Grid Stylesheets : Must have rel and type -->
+	<link rel="stylesheet" type="text/css" href="/client/lib/angular-grid/dist/angular-grid.css">
+	<link rel="stylesheet" type="text/css" href="/client/lib/angular-grid/dist/theme-fresh.css">
+	<link rel="stylesheet" type="text/css" href="/client/lib/angular-grid/dist/theme-dark.css">
 	
 	<title>Angular Home Theater App</title>
 </head>
@@ -14,8 +18,13 @@
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#/home"> Angular Home Theater Implementation</a>
+			<div class="row">
+				<div class="navbar-header col-md-6">
+					<a class="navbar-brand" href="#/home"> Angular Home Theater Implementation</a>
+				</div>
+				<div class="col-md-6">
+					<a class="navbar-brand pull-right" href="#/view2">Add/Edit Components</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -45,5 +54,7 @@
 	<script src="/client/js/services.js"></script>
 	<!-- Pull in D3 -->
 	<script src="/client/lib/d3/d3.v3.js"></script>
+	<!-- Angular Grid -->
+	<script src="/client/lib/angular-grid/dist/angular-grid.js"></script>
 </body>
 </html>
