@@ -24,7 +24,7 @@ var app = angular.module('homeTheaterApp', [
 		$routeProvider.when('/view2', 
 		{
 			templateUrl: '/client/partials/partial2.html',
-			controller: 'MainCtrl'
+			controller: 'NewComponentCtrl'
 		}
 	);
 		$routeProvider.otherwise(

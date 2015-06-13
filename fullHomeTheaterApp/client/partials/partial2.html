@@ -1,64 +1,127 @@
-<div class="row">
-	<form>
-		<div>
-			<label>Component</label>
-			<select></select>
-		</div>	
-		<div>
-			<label>Brand</label>
-			<input>
-		</div>
-		<div>
-			<label>Cost</label>
-			<input>
-		</div>
-		<div> 
-			<label>Performance</label>
-			<input>
-		</div>
-		<div>
-			<label>Reliability</label>
-			<input>
-		</div>
-		<div>
-			<label>Height</label>
-			<input>
-		</div>
-		<div>
-			<label>Width</label>
-			<input>
-		</div>
-		<div>
-			<label>Thickness</label>
-			<input>
-		</div>
-		<div>
-			<label>Weight</label>
-			<input>
-		</div>
-		<div>
-			<label>Power Handling</label>
-			<input>
-		</div>
-		<div>
-			<label>Power Handling Min</label>
-			<input>
-		</div>
-		<div>
-			<label>Power Handling Max</label>
-			<input>
-		</div>
-		<div>
-			<label>Inputs</label>
-			<button>Add One</button>
-		</div>
-		<div>
-			<label>Outputs</label>
-			<button>Add One</button>
-		</div>
-		<button>Submit</button>
-	</form>
+<form id="inputForm" class="form-horizontal col-sm-offset-3">
+  
+	<div class="form-group">
+	<label class="col-sm-2 control-label">Component</label>
+	<div class="col-sm-4">
+	  <select class="form-control" ng-model="newComponent" ng-options="value.name for value in axisValues"></select>
+	</div>
+	</div>
 
-	<button>Edit</button>
-	<button>Delete</button>
-</div>
+	  <div class="form-group">
+		<label class="col-sm-2 control-label">Brand</label>
+		<div class="col-sm-4">
+		  <input class="form-control" placeholder="Brand">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Cost</label>
+		<div class="col-sm-4">
+		  <input class="form-control" placeholder="Cost">
+		</div>
+	</div>
+
+	<div class="form-group"> 
+		<label class="col-sm-2 control-label">Performance</label>
+		<div class="col-sm-4">
+		  <input class="form-control" placeholder="Performance">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Reliability</label>
+		<div class="col-sm-4">
+		  <input class="form-control" placeholder="Reliability">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Height</label>
+		<div class="col-sm-4">
+		  <input class="form-control" placeholder="Height">
+		</div>
+	</div>
+
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">Width</label>
+	  <div class="col-sm-4">
+	    <input class="form-control" placeholder="Width">
+	  </div>
+	</div>
+
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">Thickness</label>
+	  <div class="col-sm-4">
+	  	<input class="form-control" placeholder="Thickness">
+	  </div>
+	</div>
+
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">Weight</label>
+	  <div class="col-sm-4">
+	  	<input class="form-control" placeholder="Weight">
+	  </div>
+	</div>
+
+	<div class="form-group">
+		  <label class="col-sm-2 control-label">Power Handling</label>
+	  <div class="col-sm-4">
+	  	<input class="form-control" placeholder="Power Handling">
+	  </div>
+	</div>
+
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">Power Handling Min</label>
+	  <div class="col-sm-4">
+	  	<input class="form-control" placeholder="Power Handling Min">
+	  </div>
+	</div>
+
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">Power Handling Max</label>
+	  <div class="col-sm-4">
+	  	<input class="form-control" placeholder="Power Handling Max">
+	  </div>
+	</div>
+
+	<div class="form-inline form-group">
+	  <label class="col-sm-2 control-label">Inputs</label>
+	  <div class="col-sm-2">
+		<input class="form-control" placeholder="Type" ng-model="type">
+	  </div>
+	  <div class="col-sm-3">
+	    <input class="form-control" placeholder="Quantity" ng-model="quantity">
+	  </div>
+	  <div class="col-sm-1">
+	  	<button class="btn" ng-click="addNewInput(type, quantity)">Add</button>
+	  </div>
+	</div>
+
+</form>
+
+<!-- <form class="form-inline col-sm-offset-3">
+  <label class="col-sm-2 control-label">Inputs</label>
+  <div class="form-group col-sm-8">
+    <input class="form-control col-sm-4" placeholder="Type">
+    <input class="form-control col-sm-4" placeholder="Quantity">
+  </div>
+
+</form> -->
+
+<!-- <form class="form-inline">
+  <label class="col-sm-2 control-label">Outputs</label>
+  <div class=" form-group col-sm-8">
+  	<input class="form-control col-sm-4" placeholder="Type">
+  	<input class="form-control col-sm-4" placeholder="Quantity">
+  	<button>Add One</button>
+  </div>
+</form> -->
+
+<!-- <div class="form-group">
+  <div class="col-sm-offset-3">
+  	<button class="btn btn-primary col-sm-3">Submit</button>
+  </div>
+</div> -->
+
+<!-- 	<button>Edit</button>
+	<button>Delete</button> -->

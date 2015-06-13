@@ -42,6 +42,10 @@ body {
 	text-align: center;
 }
 
+#inputForm {
+    padding-top: 50px;
+}
+
 /* Set a div id="requirements" to apply this style*/
 #requirements {
 	text-align: center;

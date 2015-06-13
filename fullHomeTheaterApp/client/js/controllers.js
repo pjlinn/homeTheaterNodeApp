@@ -64,3 +64,29 @@ controllers.controller('MainCtrl', [
 		};
 	}
 ]);
+
+controllers.controller('NewComponentCtrl', [
+	'$scope',
+	function($scope) {
+		// For the options. Using objects is unnecessary in this case
+		$scope.axisValues = [
+			{ name:'Cost', value:'cost', index: 0},
+			{ name:'Performance', value:'performance', index: 1},
+			{ name:'Reliability', value:'reliability', index: 2}
+		];
+
+		$scope.newComponent;
+
+		$scope.inputsArray = [];
+
+		$scope.addNewInput = function (type, quantity) {
+			$scope.inputsArray.push({
+				type: type,
+				quantity: quantity
+			});
+			$scope.type = null;
+			$scope.quantity = null;
+			console.log($scope.inputsArray);
+		};
+	}
+]);
