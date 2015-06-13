@@ -75,18 +75,78 @@ controllers.controller('NewComponentCtrl', [
 			{ name:'Reliability', value:'reliability', index: 2}
 		];
 
-		$scope.newComponent;
+		// $scope.componentSelect,	$scope.brand, $scope.cost, $scope.performance
+		// $scope.reliability, $scope.height, $scope.width, $scope.powerHandling,
+		// $scope.powerHandlingMin, $scope.powerHandlingMax;
+		// $scope.inputType,
+		// $scope.inputQuantity, $scope.outputType, $scope.outputQuantity;
 
 		$scope.inputsArray = [];
+		$scope.outputsArray = [];
+		$scope.componentsArray = [];
 
+		/*
+
+		*/
 		$scope.addNewInput = function (type, quantity) {
-			$scope.inputsArray.push({
-				type: type,
-				quantity: quantity
-			});
-			$scope.type = null;
-			$scope.quantity = null;
+			if (type !== undefined && quantity !== undefined &&
+				type !== null && quantity !== null) {
+				$scope.inputsArray.push({
+					type: type,
+					quantity: quantity
+				});
+				$scope.inputType = null;
+				$scope.inputQuantity = null;				
+			};
 			console.log($scope.inputsArray);
+		};
+
+		/*
+
+		*/
+		$scope.addNewOutput = function (type, quantity) {
+			if (type !== undefined && quantity !== undefined && 
+				type !== null && quantity !== null) {
+				$scope.outputsArray.push({
+					type: type,
+					quantity: quantity
+				});
+				$scope.outputType = null;
+				$scope.outputQuantity = null;				
+			};
+			console.log($scope.outputsArray);
+		};
+
+		/*
+
+		*/		
+		$scope.addNewComponent = function (
+			component, brand, cost, performance, reliability, height,
+			width, thickness, weight, powerHandling, powerHandlingMin,
+			powerHandlingMax, inputs, outputs) {
+
+			if (component == !undefined && brand !== undefined && cost !== undefined &&
+				performance !== undefined && reliability !== undefined && 
+				height !== undefined && width !== undefined && thickness !== undefined &&
+				weight !== undefined && inputs !== [] && outputs == []) {
+
+				$scope.componentsArray.push({
+					component: component,
+					brand: brand,
+					cost: cost,
+					performance: performance,
+					reliability: reliability,
+					height: height,
+					width: width,
+					thickness: thickness,
+					weight: weight,
+					powerHandling: powerHandling,
+					powerHandlingMin: powerHandlingMin,
+					powerHandlingMax: powerHandlingMax,
+					inputs: inputs,
+					outputs: outputs
+				});
+			};
 		};
 	}
 ]);
