@@ -23,7 +23,7 @@ controllers.controller('MainCtrl', [
 		$scope.amplifiers = Amplifiers.query();
 		$scope.speakers = Speakers.query();
 	
-		// Need to use promise for the direvtive watch
+		// Need to use promise for the directive watch
 		var componentResponse = Components.query();
 		componentResponse.$promise.then(function(result) {
 			$scope.components = result;
@@ -66,8 +66,8 @@ controllers.controller('MainCtrl', [
 ]);
 
 controllers.controller('NewComponentCtrl', [
-	'$scope',
-	function($scope) {
+	'$scope', 'HdTv',
+	function($scope, HdTv) {
 		// For the options. Using objects is unnecessary in this case
 		$scope.axisValues = [
 			{ name:'Cost', value:'cost', index: 0},
@@ -75,18 +75,15 @@ controllers.controller('NewComponentCtrl', [
 			{ name:'Reliability', value:'reliability', index: 2}
 		];
 
-		// $scope.componentSelect,	$scope.brand, $scope.cost, $scope.performance
-		// $scope.reliability, $scope.height, $scope.width, $scope.powerHandling,
-		// $scope.powerHandlingMin, $scope.powerHandlingMax;
-		// $scope.inputType,
-		// $scope.inputQuantity, $scope.outputType, $scope.outputQuantity;
-
 		$scope.inputsArray = [];
 		$scope.outputsArray = [];
 		$scope.componentsArray = [];
+		$scope.newComponent = {};
 
 		/*
-
+			Inputs are stored as an array of objects. So this function
+			pushes new object from the form into that array to be 
+			POSTed later.
 		*/
 		$scope.addNewInput = function (type, quantity) {
 			if (type !== undefined && quantity !== undefined &&
@@ -102,7 +99,10 @@ controllers.controller('NewComponentCtrl', [
 		};
 
 		/*
-
+			Same as with inputs, outputs are stored as an array of 
+			objects. Some logic was added to only submit if both
+			values were provided and only clear the form after a 
+			complete submission.
 		*/
 		$scope.addNewOutput = function (type, quantity) {
 			if (type !== undefined && quantity !== undefined && 
@@ -118,20 +118,28 @@ controllers.controller('NewComponentCtrl', [
 		};
 
 		/*
-
+			Need to create an object / array of objects to POST to
+			the database. Similar checks added to make sure the form is
+			cleared and correctly filled out. If one of the inputs is filled
+			ther other becomes null instead of undefined so we need to account
+			for both.
 		*/		
 		$scope.addNewComponent = function (
 			component, brand, cost, performance, reliability, height,
 			width, thickness, weight, powerHandling, powerHandlingMin,
 			powerHandlingMax, inputs, outputs) {
 
-			if (component == !undefined && brand !== undefined && cost !== undefined &&
+			if (component !== undefined && brand !== undefined && cost !== undefined &&
 				performance !== undefined && reliability !== undefined && 
 				height !== undefined && width !== undefined && thickness !== undefined &&
-				weight !== undefined && inputs !== [] && outputs == []) {
+				weight !== undefined && inputs.length !== 0 && outputs.length !== 0 && 
+				component !== null && brand !== null && cost !== null &&
+				performance !== null && reliability !== null && 
+				height !== null && width !== null && thickness !== null &&
+				weight !== null) {
 
-				$scope.componentsArray.push({
-					component: component,
+				$scope.newComponent = {
+					component: component.value,
 					brand: brand,
 					cost: cost,
 					performance: performance,
@@ -144,9 +152,34 @@ controllers.controller('NewComponentCtrl', [
 					powerHandlingMin: powerHandlingMin,
 					powerHandlingMax: powerHandlingMax,
 					inputs: inputs,
-					outputs: outputs
-				});
+					outputs: outputs					
+				};
+
+				// Can I push an object? Or do I have to push each individual
+				// property. I think I'll have to adjust the API routes to use
+				// an object...
+				var testObject = new HdTv();
+				testObject.component = 'hdtv';
+				testObject.brand = "XXXX";
+				testObject.$save();
+
+				$scope.componentsArray.push({ newComponent: $scope.newComponent });
+				
+				$scope.componentSelect = null;
+				$scope.brand = null;
+				$scope.cost = null;
+				$scope.performance = null;
+				$scope.reliability = null;
+				$scope.height = null;
+				$scope.width = null;
+				$scope.thickness = null;
+				$scope.weight = null;
+				$scope.powerHandling = null;
+				$scope.powerHandlingMin = null;
+				$scope.powerHandlingMax = null; 	
+
 			};
+			console.log($scope.componentsArray);
 		};
 	}
 ]);
