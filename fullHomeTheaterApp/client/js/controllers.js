@@ -22,6 +22,12 @@ controllers.controller('MainCtrl', [
 		$scope.televisions = Televisions.query({component: 'television'});
 		$scope.amplifiers = Amplifiers.query();
 		$scope.speakers = Speakers.query();
+
+		/*
+			Test
+		*/
+		// var testObject = new Components({component: 'hdtv'});
+		// testObject.$save();
 	
 		// Need to use promise for the directive watch
 		var componentResponse = Components.query();
@@ -66,13 +72,13 @@ controllers.controller('MainCtrl', [
 ]);
 
 controllers.controller('NewComponentCtrl', [
-	'$scope', 'HdTv',
-	function($scope, HdTv) {
+	'$scope', 'Components',
+	function($scope, Components) {
 		// For the options. Using objects is unnecessary in this case
 		$scope.axisValues = [
-			{ name:'Cost', value:'cost', index: 0},
-			{ name:'Performance', value:'performance', index: 1},
-			{ name:'Reliability', value:'reliability', index: 2}
+			{ name:'Television', value:'television', index: 0},
+			{ name:'Speaker', value:'speaker', index: 1},
+			{ name:'Amplifier', value:'amplifier', index: 2}
 		];
 
 		$scope.inputsArray = [];
@@ -155,12 +161,9 @@ controllers.controller('NewComponentCtrl', [
 					outputs: outputs					
 				};
 
-				// Can I push an object? Or do I have to push each individual
-				// property. I think I'll have to adjust the API routes to use
-				// an object...
-				var testObject = new HdTv();
-				testObject.component = 'hdtv';
-				testObject.brand = "XXXX";
+
+				// POST new component				
+				var testObject = new Components($scope.newComponent);
 				testObject.$save();
 
 				$scope.componentsArray.push({ newComponent: $scope.newComponent });

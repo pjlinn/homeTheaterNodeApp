@@ -33,18 +33,3 @@ services.factory('Components', ['$resource', function($resource) {
 		});
 	}
 ]);
-
-/*
-	Don't have internet so not positive what to do here. Definitely seeing
-	problems with how the form is working. I create an array and then push
-	an object, but I should create a component object outside of the array
-	and then just push that new object. I don't think I want to 'POST' an
-	array in this case. Just an object. Not sure how to do it so that
-	the API gets it in the parameters. Need the internet.
-*/
-services.factory('HdTv', ['$resource', function($resource) {
-		return $resource('http://localhost:3000/components', {}, {
-
-		});
-	}
-]);
