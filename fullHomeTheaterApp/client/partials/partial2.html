@@ -93,7 +93,7 @@
 	    <input class="form-control" placeholder="Quantity" ng-model="inputQuantity">
 	  </div>
 	  <div class="col-sm-1">
-	  	<button class="btn" ng-click="addNewInput(inputType, inputQuantity)">Add</button>
+	  	<button class="btn" id="addInput" ng-click="addNewInput(inputType, inputQuantity)">Add</button>
 	  </div>
 	</div>
 
@@ -106,13 +106,13 @@
 	  	<input class="form-control" placeholder="Quantity" ng-model="outputQuantity">
 	  </div>
 	  <div class="col-sm-1">
-	  	<button class="btn" ng-click="addNewOutput(outputType, outputQuantity)">Add</button>
+	  	<button class="btn" id="addOutput" ng-click="addNewOutput(outputType, outputQuantity)">Add</button>
 	  </div>
 	</div>
 
 	<div class="form-group">
 	  <div class="col-sm-offset-3">
-	  	<button class="btn btn-primary col-sm-3" ng-click="addNewComponent(componentSelect, brand, cost, performance, reliability, height, width, thickness, weight, powerHandling, powerHandlingMin, powerHandlingMax, inputsArray, outputsArray)">Submit</button>
+	  	<button class="btn btn-primary col-sm-3" id="addComponent" ng-click="addNewComponent(componentSelect, brand, cost, performance, reliability, height, width, thickness, weight, powerHandling, powerHandlingMin, powerHandlingMax, inputsArray, outputsArray)">Submit</button>
 	  </div>
 	</div>
 </form>

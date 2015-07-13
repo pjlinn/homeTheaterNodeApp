@@ -1,16 +1,23 @@
 {
-	"name": "homeTheaterApp",
-	"version": "0.0.0",
-	"private": true,
-	"scripts": {
-		"start": "node ./server/bin/www"
-	},
-	"dependencies": {
-		"express": "~4.12.0",
-		"debug": "~2.1.1",
-		"mongoose": "~3.8.24",
-		"frisby": "*",
-		"body-parser": "*",
-		"multer": "*" 
-	}
+  "name": "homeTheaterApp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./server/bin/www"
+  },
+  "dependencies": {
+    "express": "~4.12.0",
+    "debug": "~2.1.1",
+    "mongoose": "~3.8.24",
+    "frisby": "*",
+    "body-parser": "*",
+    "multer": "*"
+  },
+  "devDependencies": {
+    "karma": "~0.12.37",
+    "jasmine-core": "~2.3.4",
+    "karma-jasmine": "~0.3.6",
+    "karma-chrome-launcher": "~0.2.0",
+    "protractor": "~2.1.0"
+  }
 }
