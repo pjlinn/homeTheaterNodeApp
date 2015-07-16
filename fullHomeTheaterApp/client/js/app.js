@@ -15,21 +15,27 @@ var app = angular.module('homeTheaterApp', [
 	'homeTheaterApp.services'
 	]).
 	config(['$routeProvider', function($routeProvider) { 
-		$routeProvider.when('/view1', 
+		$routeProvider.when('/home', 
 		{
 			templateUrl: '/client/partials/partial1.html',
 			controller: 'MainCtrl'
 		}
 	);
-		$routeProvider.when('/view2', 
+		$routeProvider.when('/addComponentView', 
 		{
 			templateUrl: '/client/partials/partial2.html',
 			controller: 'NewComponentCtrl'
 		}
 	);
+		$routeProvider.when('/editComponentView',
+		{
+			templateUrl: '/client/partials/editComponentView.html',
+			controller: 'MainCtrl'
+		}
+	);
 		$routeProvider.otherwise(
 		{
-			redirectTo: '/view1'
+			redirectTo: '/home'
 		}
 	);
 }]);

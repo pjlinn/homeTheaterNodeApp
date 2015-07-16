@@ -15,6 +15,12 @@ directives.directive('ngWelcome', function() {
 	}
 });
 
+directives.directive('componentForm', function() {
+	return {
+		restrict: "E",
+		templateUrl: "/client/partials/componentForm.html"
+	}
+});
 
 // Allocates space and draws the graph. Uses components build in
 // the other directive.
