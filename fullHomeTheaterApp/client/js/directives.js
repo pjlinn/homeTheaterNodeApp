@@ -18,6 +18,7 @@ directives.directive('ngWelcome', function() {
 directives.directive('componentForm', function() {
 	return {
 		restrict: "E",
+		replace: true,
 		templateUrl: "/client/partials/componentForm.html"
 	}
 });

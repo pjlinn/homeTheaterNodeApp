@@ -24,8 +24,18 @@ controllers.controller('MainCtrl', [
 		$scope.speakers = Speakers.query();
 
 		/*
-			Test
+			Few things -- this controller might be the best one to use. Also,
+			I can't use componentSelect until I click something with it. Weird,
+			but once I set a value it is no longer undefined and changes. Need
+			to build this out and change the buttons around.
 		*/
+		$scope.populateForm = function(component) {
+			// $scope.componentSelect.name = 'television';
+			$scope.brand = component.brand;
+			$scope.componentSelect.name = component.component;
+		};
+
+
 		// var testObject = new Components({component: 'hdtv'});
 		// testObject.$save();
 	
@@ -37,9 +47,9 @@ controllers.controller('MainCtrl', [
 
 		// For the options. Using objects is unnecessary in this case
 		$scope.axisValues = [
-			{ name:'Cost', value:'cost', index: 0},
-			{ name:'Performance', value:'performance', index: 1},
-			{ name:'Reliability', value:'reliability', index: 2}
+			{ name:'Television', value:'television', index: 0},
+			{ name:'Speaker', value:'speaker', index: 1},
+			{ name:'Amplifier', value:'amplifier', index: 2}
 		];
 
 		$scope.tableHeaders = ['Design Name', 'Television', 'Speaker',
@@ -163,8 +173,8 @@ controllers.controller('NewComponentCtrl', [
 
 
 				// POST new component				
-				var testObject = new Components($scope.newComponent);
-				testObject.$save();
+				var newComponent = new Components($scope.newComponent);
+				newComponent.$save();
 
 				$scope.componentsArray.push({ newComponent: $scope.newComponent });
 				
