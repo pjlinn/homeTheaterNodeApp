@@ -15,6 +15,7 @@ directives.directive('ngWelcome', function() {
 	}
 });
 
+// Form for adding a new component
 directives.directive('componentForm', function() {
 	return {
 		restrict: "E",
@@ -22,6 +23,15 @@ directives.directive('componentForm', function() {
 		templateUrl: "/client/partials/componentForm.html"
 	}
 });
+
+// Form for editing an existing component
+directives.directive('editComponentForm', function() {
+	return {
+		restrict: "E",
+		replace: true,
+		templateUrl: "/client/partials/editComponentForm.html"
+	}
+})
 
 // Allocates space and draws the graph. Uses components build in
 // the other directive.

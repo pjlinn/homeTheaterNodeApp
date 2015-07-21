@@ -23,19 +23,6 @@ controllers.controller('MainCtrl', [
 		$scope.amplifiers = Amplifiers.query();
 		$scope.speakers = Speakers.query();
 
-		/*
-			Few things -- this controller might be the best one to use. Also,
-			I can't use componentSelect until I click something with it. Weird,
-			but once I set a value it is no longer undefined and changes. Need
-			to build this out and change the buttons around.
-		*/
-		$scope.populateForm = function(component) {
-			// $scope.componentSelect.name = 'television';
-			$scope.brand = component.brand;
-			$scope.componentSelect.name = component.component;
-		};
-
-
 		// var testObject = new Components({component: 'hdtv'});
 		// testObject.$save();
 	
@@ -47,9 +34,9 @@ controllers.controller('MainCtrl', [
 
 		// For the options. Using objects is unnecessary in this case
 		$scope.axisValues = [
-			{ name:'Television', value:'television', index: 0},
-			{ name:'Speaker', value:'speaker', index: 1},
-			{ name:'Amplifier', value:'amplifier', index: 2}
+			{ name:'Cost', value:'cost', index: 0},
+			{ name:'Performance', value:'performance', index: 1},
+			{ name:'Reliability', value:'reliability', index: 2}
 		];
 
 		$scope.tableHeaders = ['Design Name', 'Television', 'Speaker',
@@ -85,7 +72,7 @@ controllers.controller('NewComponentCtrl', [
 	'$scope', 'Components',
 	function($scope, Components) {
 		// For the options. Using objects is unnecessary in this case
-		$scope.axisValues = [
+		$scope.componentTypes = [
 			{ name:'Television', value:'television', index: 0},
 			{ name:'Speaker', value:'speaker', index: 1},
 			{ name:'Amplifier', value:'amplifier', index: 2}
@@ -95,6 +82,36 @@ controllers.controller('NewComponentCtrl', [
 		$scope.outputsArray = [];
 		$scope.componentsArray = [];
 		$scope.newComponent = {};
+		// Need to set this initially, otherwise appears as undefined and can't set the value
+		$scope.componentSelect = { value: $scope.componentTypes[0].value };
+
+		// Need to use promise for the directive watch
+		var componentResponse = Components.query();
+		componentResponse.$promise.then(function(result) {
+			$scope.components = result;
+		});
+
+		/*
+			Few things -- this controller might not be the best one to use. Also,
+			I can't use componentSelect until I click something with it. Weird,
+			but once I set a value it is no longer undefined and changes. Need
+			to build this out and change the buttons around.
+		*/
+		$scope.populateForm = function(component) {
+			// $scope.componentSelect.name = 'television';
+			$scope.componentSelect.value = component.component;
+			$scope.brand = component.brand;
+			$scope.cost = component.cost;
+			$scope.performance = component.performance;
+			$scope.reliability = component.reliability;
+			$scope.height = component.height;
+			$scope.width = component.width;
+			$scope.thickness = component.thickness;
+			$scope.weight = component.weight;
+			$scope.powerHandling = component.powerHandling;
+			$scope.powerHandlingMin = component.powerHandlingMin;
+			$scope.powerHandlingMax = component.powerHandlingMax;
+		};
 
 		/*
 			Inputs are stored as an array of objects. So this function

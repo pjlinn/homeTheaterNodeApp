@@ -30,7 +30,7 @@ var app = angular.module('homeTheaterApp', [
 		$routeProvider.when('/editComponentView',
 		{
 			templateUrl: '/client/partials/editComponentView.html',
-			controller: 'MainCtrl'
+			controller: 'NewComponentCtrl'
 		}
 	);
 		$routeProvider.otherwise(
