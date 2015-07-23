@@ -33,3 +33,9 @@ services.factory('Components', ['$resource', function($resource) {
 		});
 	}
 ]);
+
+services.factory('UpdateComponent', ['$resource', function($resource) {
+		return $resource('http://localhost:3000/components/update/:_id', {}, {
+			query: { method: 'GET', params: {}, isArray: true }
+		});
+}]);

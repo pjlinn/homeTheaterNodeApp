@@ -14,7 +14,7 @@ var query;
 // GET /components
 router.get('/', function(req, res, next) {
 	query = Component.find();
-	query.select('-__v -_id');
+	query.select('-__v');
 	query.exec(function(err, components) {
 		if (err) return err;
 		res.json(components);
@@ -32,7 +32,27 @@ router.get('/:component', function(req, res, next) {
 
 	query = Component.where({ component: component });
 	query.findOne();
-	query.select('-__v -_id');
+	query.select('-__v');
+	query.exec(function(err, components) {
+		if (err) return err;
+		res.json(components);
+		next();
+	});
+});
+
+// GET /components/update/:_id 
+/*
+	Had to add another path. Kept getting the error: 
+	Error: Can't set headers after they are sent.
+	Someone said this meant the request was being called twice
+	so I added another path (/find) and it works...Need to
+	understand this better.
+*/
+router.get('/update/:_id', function(req, res, next) {
+	var componentId = req.params._id;
+
+	query = Component.where({ _id: componentId });
+	query.find();
 	query.exec(function(err, components) {
 		if (err) return err;
 		res.json(components);
@@ -78,12 +98,34 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+// PUT /component/update/:_id
+router.put('/:_id', function(req, res, next) {
+	// Speaker.findByIdAndUpdate(req.params.id, { brand: req.body.brand }, function(err, updatedSpeaker) {
+	// 	if (err) return err;
+	// 	res.json(updatedSpeaker);
+	// 	next();
+	// });
+});
+
+
 // DELETE /components
 router.delete('/', function(req, res, next) {
 	query = Component.remove({});
 	query.exec(function(err) {
 		if (err) return err;
 		res.json({ status: 'All components deleted.' });
+		next();
+	});
+});
+
+// DELETE :id /components/update/:id
+router.delete('/update/:id', function(req, res, next) {
+	var componentId = req.params.id;
+
+	query = Component.remove({ _id: componentId });
+	query.exec(function(err, components) {
+		if (err) return err;
+		res.json({ status: 'Component deleted.' });
 		next();
 	});
 });

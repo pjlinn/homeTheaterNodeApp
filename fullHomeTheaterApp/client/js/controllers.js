@@ -69,8 +69,8 @@ controllers.controller('MainCtrl', [
 ]);
 
 controllers.controller('NewComponentCtrl', [
-	'$scope', 'Components',
-	function($scope, Components) {
+	'$scope', 'Components', 'UpdateComponent',
+	function($scope, Components, UpdateComponent) {
 		// For the options. Using objects is unnecessary in this case
 		$scope.componentTypes = [
 			{ name:'Television', value:'television', index: 0},
@@ -78,18 +78,42 @@ controllers.controller('NewComponentCtrl', [
 			{ name:'Amplifier', value:'amplifier', index: 2}
 		];
 
+		$scope.clearForm = function() {
+			$scope.componentId = null;
+			$scope.componentSelect = null;
+			$scope.brand = null;
+			$scope.cost = null;
+			$scope.performance = null;
+			$scope.reliability = null;
+			$scope.height = null;
+			$scope.width = null;
+			$scope.thickness = null;
+			$scope.weight = null;
+			$scope.powerHandling = null;
+			$scope.powerHandlingMin = null;
+			$scope.powerHandlingMax = null; 			
+		}
+
 		$scope.inputsArray = [];
 		$scope.outputsArray = [];
 		$scope.componentsArray = [];
 		$scope.newComponent = {};
 		// Need to set this initially, otherwise appears as undefined and can't set the value
-		$scope.componentSelect = { value: $scope.componentTypes[0].value };
+		$scope.setComponentSelect = function() {
+			$scope.componentSelect = { value: $scope.componentTypes[0].value };
+		};
+
+		$scope.setComponentSelect();
 
 		// Need to use promise for the directive watch
-		var componentResponse = Components.query();
-		componentResponse.$promise.then(function(result) {
-			$scope.components = result;
-		});
+		$scope.populateList = function() {
+			var componentResponse = Components.query();
+			componentResponse.$promise.then(function(result) {
+				$scope.components = result;
+			});			
+		}
+
+		$scope.populateList();
 
 		/*
 			Few things -- this controller might not be the best one to use. Also,
@@ -98,7 +122,7 @@ controllers.controller('NewComponentCtrl', [
 			to build this out and change the buttons around.
 		*/
 		$scope.populateForm = function(component) {
-			// $scope.componentSelect.name = 'television';
+			$scope.componentId = component._id;
 			$scope.componentSelect.value = component.component;
 			$scope.brand = component.brand;
 			$scope.cost = component.cost;
@@ -111,6 +135,31 @@ controllers.controller('NewComponentCtrl', [
 			$scope.powerHandling = component.powerHandling;
 			$scope.powerHandlingMin = component.powerHandlingMin;
 			$scope.powerHandlingMax = component.powerHandlingMax;
+		};
+
+		/*
+			DELETE component function for delete button
+		*/
+		$scope.deleteComponent = function(componentId) {
+			var updateComponent = new UpdateComponent();
+			updateComponent.$remove({ _id: componentId });
+			$scope.clearForm();
+			$scope.populateList();
+			$scope.setComponentSelect();		
+		};
+
+		/*
+			PUT updates to the component
+
+			!***! - NOT how this is going to work -- I'll have to pass
+			all the parameters I'm updating...
+		*/
+		$scope.sendUpdates = function(componentId) {
+			var updateComponent = new UpdateComponent();
+			updateComponent.$save({ _id: componentId });
+			$scope.clearForm();
+			$scope.populateList();
+			$scope.setComponentSelect();
 		};
 
 		/*
@@ -162,6 +211,7 @@ controllers.controller('NewComponentCtrl', [
 			width, thickness, weight, powerHandling, powerHandlingMin,
 			powerHandlingMax, inputs, outputs) {
 
+			// Form must be filled in completely
 			if (component !== undefined && brand !== undefined && cost !== undefined &&
 				performance !== undefined && reliability !== undefined && 
 				height !== undefined && width !== undefined && thickness !== undefined &&
@@ -191,22 +241,12 @@ controllers.controller('NewComponentCtrl', [
 
 				// POST new component				
 				var newComponent = new Components($scope.newComponent);
+				// POST: /components {component: ..., brand: ...}
 				newComponent.$save();
 
 				$scope.componentsArray.push({ newComponent: $scope.newComponent });
-				
-				$scope.componentSelect = null;
-				$scope.brand = null;
-				$scope.cost = null;
-				$scope.performance = null;
-				$scope.reliability = null;
-				$scope.height = null;
-				$scope.width = null;
-				$scope.thickness = null;
-				$scope.weight = null;
-				$scope.powerHandling = null;
-				$scope.powerHandlingMin = null;
-				$scope.powerHandlingMax = null; 	
+
+				$scope.clearForm();	
 
 			};
 			console.log($scope.componentsArray);
