@@ -98,13 +98,29 @@ router.post('/', function(req, res, next) {
 	});
 });
 
-// PUT /component/update/:_id
-router.put('/:_id', function(req, res, next) {
-	// Speaker.findByIdAndUpdate(req.params.id, { brand: req.body.brand }, function(err, updatedSpeaker) {
-	// 	if (err) return err;
-	// 	res.json(updatedSpeaker);
-	// 	next();
-	// });
+// PUT /components/update/:_id
+router.put('/update/:_id', function(req, res, next) {
+	var componentId = req.params._id;
+	var updates = {
+		component: req.body.component,
+		brand: req.body.brand,
+		cost: req.body.cost,
+		performance: req.body.performance,
+		reliability: req.body.reliability,
+		height: req.body.height,
+		width: req.body.width,
+		thickness: req.body.thickness,
+		weight: req.body.weight,
+		powerHandling: req.body.powerHandling,
+		powerHandlingMin: req.body.powerHandlingMin,
+		powerHandlingMax: req.body.powerHandlingMax	
+	};
+
+	Component.findByIdAndUpdate(componentId, updates, function(err, update) {
+		if (err) return err;
+		res.json(update);
+		next();
+	});
 });
 
 

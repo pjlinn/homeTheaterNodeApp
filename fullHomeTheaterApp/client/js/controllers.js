@@ -150,13 +150,27 @@ controllers.controller('NewComponentCtrl', [
 
 		/*
 			PUT updates to the component
-
-			!***! - NOT how this is going to work -- I'll have to pass
-			all the parameters I'm updating...
 		*/
-		$scope.sendUpdates = function(componentId) {
-			var updateComponent = new UpdateComponent();
-			updateComponent.$save({ _id: componentId });
+		$scope.sendUpdates = function(componentId, component, brand, 
+			cost, performance, reliability, height, width, thickness, 
+			weight, powerHandling, powerHandlingMin, powerHandlingMax) {
+
+			var updates = {
+				component: component.value,
+				brand: brand,
+				cost: cost,
+				performance: performance,
+				reliability: reliability,
+				height: height,
+				width: width,
+				thickness: thickness,
+				weight: weight,
+				powerHandling: powerHandling,
+				powerHandlingMin: powerHandlingMin,
+				powerHandlingMax: powerHandlingMax				
+			};
+
+			UpdateComponent.update( { _id: componentId }, updates);
 			$scope.clearForm();
 			$scope.populateList();
 			$scope.setComponentSelect();
