@@ -1,0 +1,14 @@
+<div class="main col-lg-12 myHalfCol">
+	<div class="col-lg-6 leftSide">
+		<input placeholder="Search Components..." class="form-control" ng-model="query">
+		<ul>
+			<li ng-repeat="component in components | filter:query"> 
+				<span ng-click="populateForm(component)"> {{component.brand}} {{component.component}}</span>
+			</li>
+		</ul>
+	</div>
+
+	<div class="col-lg-6 rightSide">	
+		<edit-component-form></edit-component-form>
+	</div>
+</div>
