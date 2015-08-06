@@ -19,6 +19,7 @@ mongoose.connect('mongodb://localhost/homeTheaterDb', function(err) {
 		console.log('connection error', err);
 	} else {
 		console.log('connection successful');
+		console.log('navigate to http://localhost:3000/home/#/home');
 	}
 });
 

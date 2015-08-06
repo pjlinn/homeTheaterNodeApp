@@ -155,6 +155,26 @@ controllers.controller('NewComponentCtrl', [
 			cost, performance, reliability, height, width, thickness, 
 			weight, powerHandling, powerHandlingMin, powerHandlingMax) {
 
+			/*
+				Real weird situation where the PUT command wouldn't update
+				because some fields were empty and listed as undefined. So
+				I have to do this check to set them to null. Probably should
+				change how things are posted instead of checking this far down
+				the line.
+			*/
+			if (component === undefined) { component = null; };
+			if (brand === undefined) { brand = null; };
+			if (cost === undefined) { cost = null; };
+			if (performance === undefined) { performance = null; };
+			if (reliability === undefined) { reliability = null; };
+			if (height === undefined) { height = null; };
+			if (width === undefined) { width = null; };
+			if (thickness === undefined) { thickness = null; };
+			if (weight === undefined) { weight = null; };
+			if (powerHandling === undefined) { powerHandling = null; };
+			if (powerHandlingMin === undefined) { powerHandlingMin = null; };
+			if (powerHandlingMax === undefined) { powerHandlingMax = null; };
+
 			var updates = {
 				component: component.value,
 				brand: brand,
