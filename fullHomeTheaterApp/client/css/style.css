@@ -67,3 +67,7 @@ body {
 .myHalfCol .rightSide {
     /*background-color: gray;*/
 }
+
+.noBullets {
+    list-style-type: none;
+}

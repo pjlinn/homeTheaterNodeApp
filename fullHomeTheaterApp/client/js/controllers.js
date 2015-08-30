@@ -98,6 +98,8 @@ controllers.controller('NewComponentCtrl', [
 		$scope.outputsArray = [];
 		$scope.componentsArray = [];
 		$scope.newComponent = {};
+		$scope.componentInputs = [];
+		$scope.componentOutputs = [];
 		// Need to set this initially, otherwise appears as undefined and can't set the value
 		$scope.setComponentSelect = function() {
 			$scope.componentSelect = { value: $scope.componentTypes[0].value };
@@ -135,6 +137,48 @@ controllers.controller('NewComponentCtrl', [
 			$scope.powerHandling = component.powerHandling;
 			$scope.powerHandlingMin = component.powerHandlingMin;
 			$scope.powerHandlingMax = component.powerHandlingMax;
+
+			$scope.componentInputs = [];
+			$scope.componentOutputs = [];
+
+			// ng-repeat arrays for inputs/outputs
+			component.inputs.forEach( function (input) {
+				$scope.componentInputs.push(input);
+			});
+
+			component.outputs.forEach(function (output) {
+				$scope.componentOutputs.push(output);
+			});
+		};
+
+		/*
+			Populate input text boxes for update and deletion
+		*/
+		$scope.populateInput = function(input) {
+			$scope.inputType = input.type;
+			$scope.inputQuantity = input.quantity;
+		};
+
+		/*
+			Populate output text boxes for update and deletion
+		*/
+		$scope.populateOutput = function(output) {
+			$scope.outputType = output.type;
+			$scope.outputQuantity = output.quantity;
+		};
+		/*
+			Clear input fields
+		*/
+		$scope.clearInputForm = function() {
+			$scope.inputType = "";
+			$scope.inputQuantity = "";			
+		};
+		/*
+			Clear output fields
+		*/
+		$scope.clearOutputForm = function() {
+			$scope.outputType = "";
+			$scope.outputQuantity = "";			
 		};
 
 		/*
