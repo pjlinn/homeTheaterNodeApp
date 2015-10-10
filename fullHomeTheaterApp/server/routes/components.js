@@ -98,6 +98,11 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+// POST /components/update/inputs/:_id
+// router.post('/update/inputs/:_id', function(req, res, next) {
+// 	var componentId = req.params._id;
+// }
+
 // PUT /components/update/:_id
 router.put('/update/:_id', function(req, res, next) {
 	var componentId = req.params._id;
@@ -122,7 +127,6 @@ router.put('/update/:_id', function(req, res, next) {
 		next();
 	});
 });
-
 
 // DELETE /components
 router.delete('/', function(req, res, next) {
