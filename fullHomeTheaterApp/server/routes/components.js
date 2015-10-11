@@ -98,10 +98,31 @@ router.post('/', function(req, res, next) {
 	});
 });
 
-// POST /components/update/inputs/:_id
-// router.post('/update/inputs/:_id', function(req, res, next) {
-// 	var componentId = req.params._id;
-// }
+// PUT (DELETE) /components/inputs/delete/:componentId/:inputId
+router.put('inputs/delete/:componentId/:inputId', function(req, res, next) {
+	var componentId = req.params.componentId;
+	var inputId = req.params.inputId;
+
+	var updates = {
+		type: "",
+		quantity: ""
+	};
+
+	Component.findOneAndUpdate(
+		{ "_id": componentId, "inputs._id": inputId },
+		{
+			"$set": {
+				"inputs.$.type": updates.type,
+				"inputs.$.quantity": updates.quantity
+			}
+		},
+		function(err, doc) {
+			if (err) return err;
+			res.json(doc);
+			next();
+		}
+	);
+});
 
 // PUT /components/update/:_id
 router.put('/update/:_id', function(req, res, next) {

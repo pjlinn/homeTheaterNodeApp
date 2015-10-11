@@ -69,8 +69,8 @@ controllers.controller('MainCtrl', [
 ]);
 
 controllers.controller('NewComponentCtrl', [
-	'$scope', 'Components', 'UpdateComponent',
-	function($scope, Components, UpdateComponent) {
+	'$scope', 'Components', 'UpdateComponent', 'DeleteInput',
+	function($scope, Components, UpdateComponent, DeleteInput) {
 		// For the options. Using objects is unnecessary in this case
 		$scope.componentTypes = [
 			{ name:'Television', value:'television', index: 0},
@@ -157,6 +157,7 @@ controllers.controller('NewComponentCtrl', [
 		$scope.populateInput = function(input) {
 			$scope.inputType = input.type;
 			$scope.inputQuantity = input.quantity;
+			$scope.inputId = input._id;
 		};
 
 		/*
@@ -190,6 +191,17 @@ controllers.controller('NewComponentCtrl', [
 			$scope.clearForm();
 			$scope.populateList();
 			$scope.setComponentSelect();		
+		};
+
+		/*
+			DELETE input function for input delete button
+		*/
+		$scope.deleteInput = function(componentId, inputId) {
+			// var clearInput = new DeleteInput();
+			DeleteInput.update( { componentId: componentId, inputId: inputId }, {});
+			// $scope.populateList();
+			// $scope.setComponentSelect();
+			// console.log(componentIdX, inputIdX);
 		};
 
 		/*

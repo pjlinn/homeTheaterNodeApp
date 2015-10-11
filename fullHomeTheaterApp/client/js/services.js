@@ -39,4 +39,14 @@ services.factory('UpdateComponent', ['$resource', function($resource) {
 			query: { method: 'GET', params: {}, isArray: true },
 			update: { method: 'PUT', params: {} }
 		});
-}]);
+	}
+]);
+
+// Do I have to have ...3000/components or can it be 3000/inputs?
+services.factory('DeleteInput', ['$resource', function($resource) {
+		return $resource('http://localhost:3000/components/inputs/delete/:componentId/:inputId', {}, {
+			query: { method: 'GET', params: {}, isArray: true },
+			update: { method: 'PUT' }
+		});
+	}
+]);
