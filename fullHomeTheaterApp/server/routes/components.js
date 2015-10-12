@@ -124,6 +124,32 @@ router.put('inputs/delete/:componentId/:inputId', function(req, res, next) {
 	);
 });
 
+// PUT /components/inputs/update/:componentId/:inputId
+router.put('/abc/:componentId/:inputId', function(req, res, next) {
+	var componentId = req.params.componentId;
+	var inputId = req.params.inputId;
+
+	var updates = {
+		type: req.body.inputs.type,
+		quantity: req.body.inputs.quantity
+	};
+
+	Component.findOneAndUpdate(
+		{ "_id": componentId, "inputs._id": inputId },
+		{
+			"$set": {
+				"inputs.$.type": updates.type,
+				"inputs.$.quantity": updates.quantity
+			}
+		},
+		function(err, doc) {
+			if (err) return err;
+			res.json(doc);
+			next();
+		}
+	);
+});
+
 // PUT /components/update/:_id
 router.put('/update/:_id', function(req, res, next) {
 	var componentId = req.params._id;

@@ -46,7 +46,14 @@ services.factory('UpdateComponent', ['$resource', function($resource) {
 services.factory('DeleteInput', ['$resource', function($resource) {
 		return $resource('http://localhost:3000/components/inputs/delete/:componentId/:inputId', {}, {
 			query: { method: 'GET', params: {}, isArray: true },
-			update: { method: 'PUT' }
+			update: { method: 'PUT', params: {} }
+		});
+	}
+]);
+
+services.factory('UpdateInput', ['$resource', function($resource) {
+		return $resource('http://localhost:3000/components/inputs/update/:componentId/:inputId', {}, {
+			update: { method: 'PUT', params: {} }
 		});
 	}
 ]);

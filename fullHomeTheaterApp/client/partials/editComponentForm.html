@@ -98,7 +98,7 @@
 	  <h5 ng-click="clearInputForm()">Inputs</h5>
 	  <ul class="noBullets">
 		<li ng-repeat="input in componentInputs">
-		  <span ng-click="populateInput(input)">ID: {{input._id}} Type: {{input.type}} | Quantity: {{input.quantity}}</span>
+		  <span ng-click="populateInput(input)">Type: {{input.type}} | Quantity: {{input.quantity}}</span>
 	    </li>
 	  </ul>
 
@@ -115,7 +115,7 @@
 	  <div class="col-sm-2">
 		<input class="form-control" placeholder="Type" ng-model="inputType">
 	  </div>
-	  <div class="col-sm-3">
+	  <div class="col-sm-2">
 	    <input class="form-control" placeholder="Quantity" ng-model="inputQuantity">
 	  </div>
 	  <div class="col-sm-2">
@@ -123,7 +123,7 @@
 	  </div>
 	  <div class="btn-group inline">
 	  	<button class="btn btn-success" id="addInput" ng-click="">Add</button>
-	  	<button class="btn btn-info" id="updateInput" ng-click="">Update</button>
+	  	<button class="btn btn-info" id="updateInput" ng-click="updateInput(componentId, inputId, inputType, inputQuantity)">Update</button>
 	  	<button class="btn btn-danger" id="deleteInput" ng-click="deleteInput(componentId, inputId)">Delete</button>	  	
 	  </div>
 	</div>
@@ -134,9 +134,12 @@
 	  <div class="col-sm-2">
 	  	<input class="form-control" placeholder="Type" ng-model="outputType">
 	  </div>
-	  <div class="col-sm-3">
+	  <div class="col-sm-2">
 	  	<input class="form-control" placeholder="Quantity" ng-model="outputQuantity">
 	  </div>
+	  <div class="col-sm-2">
+	  	<input class="form-control" placeholder="ID" ng-model="outputId">
+	  </div>	  
 	  <div class="btn-group inline">
 	  	<button class="btn btn-success" id="addOutput" ng-click="">Add</button>
 	  	<button class="btn btn-info" id="updateOutput" ng-click="">Update</button>
