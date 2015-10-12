@@ -69,8 +69,10 @@ controllers.controller('MainCtrl', [
 ]);
 
 controllers.controller('NewComponentCtrl', [
-	'$scope', 'Components', 'UpdateComponent', 'DeleteInput', 'UpdateInput',
-	function($scope, Components, UpdateComponent, DeleteInput, UpdateInput) {
+	'$scope', 'Components', 'UpdateComponent', 'DeleteInput', 'UpdateInput', 'AddInput',
+	'SpecificComponent',
+	function($scope, Components, UpdateComponent, DeleteInput, UpdateInput, AddInput,
+		SpecificComponent) {
 		// For the options. Using objects is unnecessary in this case
 		$scope.componentTypes = [
 			{ name:'Television', value:'television', index: 0},
@@ -120,6 +122,22 @@ controllers.controller('NewComponentCtrl', [
 		}
 
 		$scope.populateList();
+
+		/*
+			Populates input list - call when list is changed to update on page
+		*/
+		$scope.populateInputList = function(componentId) {
+			var componentInputResponse = SpecificComponent.query({ componentId: componentId });
+			componentInputResponse.$promise.then(function(result) {
+				// Clear the list before re-populating
+				$scope.componentInputs = [];
+				// Re-populate - call this function after changes
+				result.inputs.forEach(function (input) {
+					$scope.componentInputs.push(input);
+				});
+			});
+
+		}		
 
 		/*
 			Few things -- this controller might not be the best one to use. Also,
@@ -238,11 +256,10 @@ controllers.controller('NewComponentCtrl', [
 				$scope.inputId !== undefined) {
 				
 				DeleteInput.update( { componentId: componentId, inputId: inputId }, {});
+				
 				$scope.populateList();	
 				$scope.clearInputForm();
-				// Can't figure out how to update the ng-repeat inputs or to re-call populateList(component)
-				// So I just clear everything and make the person re-click. Not perfect
-				$scope.clearEverything();
+				$scope.populateInputList(componentId);
 			} else {
 				// Test to make sure it doesn't run when I don't want it to
 				// console.log('Yo');
@@ -268,9 +285,33 @@ controllers.controller('NewComponentCtrl', [
 				UpdateInput.update( { componentId: componentId, inputId: inputId }, updates);
 
 				$scope.populateList();
-				$scope.clearEverything();
+				$scope.clearInputForm();
+				$scope.populateInputList(componentId);
 			} else {
 				console.log('working!');
+			}
+		};
+
+		/*
+			ADD input for add button
+		*/
+		$scope.addInput = function(componentId, type, quantity) {
+			if ($scope.inputQuantity !== null && $scope.inputQuantity !== "" && 
+				$scope.inputQuantity !== undefined && $scope.inputType !== null &&
+				$scope.inputType !== "" && $scope.inputType !== undefined) {
+
+				var newInput = {
+					type: type,
+					quantity: quantity
+				};
+
+				AddInput.add( {componentId: componentId }, newInput);
+
+				$scope.populateList();
+				$scope.clearInputForm();
+				$scope.populateInputList(componentId);
+			} else {
+				console.log('working');
 			}
 		};
 

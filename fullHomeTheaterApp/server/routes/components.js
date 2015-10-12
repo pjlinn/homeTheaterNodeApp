@@ -40,6 +40,20 @@ router.get('/:component', function(req, res, next) {
 	});
 });
 
+// GET /components/find/:componentId
+router.get('/find/:componentId', function(req, res, next) {
+	var componentId = req.params.componentId;
+
+	query = Component.where({ _id: componentId });
+	query.findOne();
+	// query.select('-__v');
+	query.exec(function(err, component) {
+		if (err) return err;
+		res.json(component);
+		next();
+	});
+});
+
 // GET /components/update/:_id 
 /*
 	Had to add another path. Kept getting the error: 
@@ -99,13 +113,33 @@ router.post('/', function(req, res, next) {
 });
 
 // PUT (DELETE) /components/inputs/delete/:componentId/:inputId
-router.put('inputs/delete/:componentId/:inputId', function(req, res, next) {
+router.put('/inputs/delete/:componentId/:inputId', function(req, res, next) {
+	var componentId = req.params.componentId;
+	var inputId = req.params.inputId;
+
+	// var updates = {
+	// 	type: "",
+	// 	quantity: ""
+	// };
+
+	Component.findByIdAndUpdate( componentId, 
+			{ $pull: { 'inputs': { _id: inputId } } },
+		function(err, doc) {
+			if (err) return err;
+			res.json(doc);
+			next();
+		}
+	);
+});
+
+// PUT /components/inputs/update/:componentId/:inputId
+router.put('/inputs/update/:componentId/:inputId', function(req, res, next) {
 	var componentId = req.params.componentId;
 	var inputId = req.params.inputId;
 
 	var updates = {
-		type: "",
-		quantity: ""
+		type: req.body.type,
+		quantity: req.body.quantity
 	};
 
 	Component.findOneAndUpdate(
@@ -114,6 +148,7 @@ router.put('inputs/delete/:componentId/:inputId', function(req, res, next) {
 			"$set": {
 				"inputs.$.type": updates.type,
 				"inputs.$.quantity": updates.quantity
+				// "inputs.$.type": req.body.type
 			}
 		},
 		function(err, doc) {
@@ -124,24 +159,18 @@ router.put('inputs/delete/:componentId/:inputId', function(req, res, next) {
 	);
 });
 
-// PUT /components/inputs/update/:componentId/:inputId
-router.put('/abc/:componentId/:inputId', function(req, res, next) {
+// POST /components/inputs/add/:componentId
+router.put('/inputs/add/:componentId', function(req, res, next) {
 	var componentId = req.params.componentId;
-	var inputId = req.params.inputId;
 
-	var updates = {
-		type: req.body.inputs.type,
-		quantity: req.body.inputs.quantity
+	var newInput = {
+		type: req.body.type,
+		quantity: req.body.quantity
 	};
 
-	Component.findOneAndUpdate(
-		{ "_id": componentId, "inputs._id": inputId },
-		{
-			"$set": {
-				"inputs.$.type": updates.type,
-				"inputs.$.quantity": updates.quantity
-			}
-		},
+	Component.findByIdAndUpdate(componentId,
+		{ $push: { 'inputs': { type: newInput.type, quantity: newInput.quantity } } },
+
 		function(err, doc) {
 			if (err) return err;
 			res.json(doc);

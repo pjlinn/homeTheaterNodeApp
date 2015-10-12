@@ -57,3 +57,17 @@ services.factory('UpdateInput', ['$resource', function($resource) {
 		});
 	}
 ]);
+
+services.factory('AddInput', ['$resource', function($resource) {
+		return $resource('http://localhost:3000/components/inputs/add/:componentId', {}, {
+			add: { method: 'PUT', params: {} }
+		});
+	}
+]);
+
+services.factory('SpecificComponent', ['$resource', function($resource) {
+		return $resource('http://localhost:3000/components/find/:componentId', {}, {
+			query: { method: 'GET', params: {} }
+		});
+	}
+]);
