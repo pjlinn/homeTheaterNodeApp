@@ -102,14 +102,6 @@
 	    </li>
 	  </ul>
 
-	  <!-- Outputs list -->
-	  <h5 ng-click="clearOutputForm()">Outputs</h5>
-	  <ul class="noBullets">
-		<li ng-repeat="output in componentOutputs">
-		  <span ng-click="populateOutput(output)">Type: {{output.type}} | Quantity: {{output.quantity}}</span>
-	    </li>
-	  </ul>
-
 	  <!-- Inputs form -->
 	  <label class="col-sm-2 control-label">Inputs</label>
 	  <div class="col-sm-2">
@@ -128,6 +120,14 @@
 	  </div>
 	</div>
 
+	  <!-- Outputs list -->
+	  <h5 ng-click="clearOutputForm()">Outputs</h5>
+	  <ul class="noBullets">
+		<li ng-repeat="output in componentOutputs">
+		  <span ng-click="populateOutput(output)">Type: {{output.type}} | Quantity: {{output.quantity}}</span>
+	    </li>
+	  </ul>
+
 	<!-- Outputs form -->
 	<div class="form-inline form-group">
 	  <label class="col-sm-2 control-label">Outputs</label>
@@ -143,7 +143,7 @@
 	  <div class="btn-group inline">
 	  	<button class="btn btn-success" id="addOutput" ng-click="">Add</button>
 	  	<button class="btn btn-info" id="updateOutput" ng-click="">Update</button>
-	  	<button class="btn btn-danger" id="deleteOutput" ng-click="">Delete</button>
+	  	<button class="btn btn-danger" id="deleteOutput" ng-click="deleteOutput(componentId, outputId)">Delete</button>
 	  </div>
 	</div>
 

@@ -179,6 +179,22 @@ router.put('/inputs/add/:componentId', function(req, res, next) {
 	);
 });
 
+// DELETE (PUT) /components/outputs/delete/:componentId/:outputId
+router.put('/outputs/delete/:componentId/:outputId', function(req, res, next) {
+	var componentId = req.params.componentId;
+	var outputId = req.params.outputId;
+
+	Component.findByIdAndUpdate( componentId, 
+			{ $pull: { 'outputs': { _id: outputId } } },
+		function(err, doc) {
+			if (err) return err;
+			res.json(doc);
+			next();
+		}
+	);
+});
+
+
 // PUT /components/update/:_id
 router.put('/update/:_id', function(req, res, next) {
 	var componentId = req.params._id;

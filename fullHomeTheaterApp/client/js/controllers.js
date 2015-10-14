@@ -70,9 +70,9 @@ controllers.controller('MainCtrl', [
 
 controllers.controller('NewComponentCtrl', [
 	'$scope', 'Components', 'UpdateComponent', 'DeleteInput', 'UpdateInput', 'AddInput',
-	'SpecificComponent',
+	'SpecificComponent', 'DeleteOutput',
 	function($scope, Components, UpdateComponent, DeleteInput, UpdateInput, AddInput,
-		SpecificComponent) {
+		SpecificComponent, DeleteOutput) {
 		// For the options. Using objects is unnecessary in this case
 		$scope.componentTypes = [
 			{ name:'Television', value:'television', index: 0},
@@ -136,9 +136,20 @@ controllers.controller('NewComponentCtrl', [
 					$scope.componentInputs.push(input);
 				});
 			});
+		};
 
-		}		
-
+		/*
+			Populates output list - call when list is changes to update real-time
+		*/
+		$scope.populateOutputList = function(componentId) {
+			var componentOutputResponse = SpecificComponent.query({ componentId: componentId });
+			componentOutputResponse.$promise.then(function(result) {
+				$scope.componentOutputs = [];
+				result.outputs.forEach(function (output) {
+					$scope.componentOutputs.push(output);
+				});
+			});
+		};
 		/*
 			Few things -- this controller might not be the best one to use. Also,
 			I can't use componentSelect until I click something with it. Weird,
@@ -196,6 +207,7 @@ controllers.controller('NewComponentCtrl', [
 		$scope.populateOutput = function(output) {
 			$scope.outputType = output.type;
 			$scope.outputQuantity = output.quantity;
+			$scope.outputId = output._id;
 		};
 		/*
 			Clear input fields
@@ -210,7 +222,8 @@ controllers.controller('NewComponentCtrl', [
 		*/
 		$scope.clearOutputForm = function() {
 			$scope.outputType = "";
-			$scope.outputQuantity = "";			
+			$scope.outputQuantity = "";
+			$scope.outputId = "";		
 		};
 		/*
 			Clear component input array to clear ng-repeat
@@ -263,10 +276,29 @@ controllers.controller('NewComponentCtrl', [
 			} else {
 				// Test to make sure it doesn't run when I don't want it to
 				// console.log('Yo');
-			}
-			
-			
+			}	
 		};
+
+		/*
+			DELETE output function for output delete button
+		*/
+		$scope.deleteOutput = function(componentId, outputId) {
+			if ($scope.outputQuantity !== null && $scope.outputQuantity !== "" && 
+				$scope.outputQuantity !== undefined && $scope.outputType !== null &&
+				$scope.outputType !== "" && $scope.outputType !== undefined &&
+				$scope.outputId !== null && $scope.outputId !== "" &&
+				$scope.outputId !== undefined) {
+				
+				DeleteOutput.deleteOutput( { componentId: componentId, outputId: outputId }, {});
+
+				$scope.populateList();
+				$scope.clearOutputForm();
+				$scope.populateOutputList(componentId);
+			} else {
+				console.log("didn't fire");
+			}
+		};
+
 		/*
 			UPDATE input for update button
 		*/
