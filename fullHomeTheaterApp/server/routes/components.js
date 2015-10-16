@@ -148,7 +148,6 @@ router.put('/inputs/update/:componentId/:inputId', function(req, res, next) {
 			"$set": {
 				"inputs.$.type": updates.type,
 				"inputs.$.quantity": updates.quantity
-				// "inputs.$.type": req.body.type
 			}
 		},
 		function(err, doc) {
@@ -194,6 +193,31 @@ router.put('/outputs/delete/:componentId/:outputId', function(req, res, next) {
 	);
 });
 
+// PUT /components/outputs/update/:componentId/:outputId
+router.put('/outputs/update/:componentId/:outputId', function(req, res, next) {
+	var componentId = req.params.componentId;
+	var outputId = req.params.outputId;
+
+	var updates = {
+		type: req.body.type,
+		quantity: req.body.quantity 
+	};
+
+	Component.findOneAndUpdate(
+		{ "_id": componentId, "outputs._id": outputId },
+		{
+			"$set": {
+				"outputs.$.type": updates.type,
+				"outputs.$.quantity": updates.quantity
+			}
+		},
+		function(err, doc) {
+			if (err) return err;
+			res.json(doc);
+			next();
+		}
+	);
+});
 
 // PUT /components/update/:_id
 router.put('/update/:_id', function(req, res, next) {

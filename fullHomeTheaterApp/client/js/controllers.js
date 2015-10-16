@@ -70,9 +70,9 @@ controllers.controller('MainCtrl', [
 
 controllers.controller('NewComponentCtrl', [
 	'$scope', 'Components', 'UpdateComponent', 'DeleteInput', 'UpdateInput', 'AddInput',
-	'SpecificComponent', 'DeleteOutput',
+	'SpecificComponent', 'DeleteOutput', 'UpdateOutput',
 	function($scope, Components, UpdateComponent, DeleteInput, UpdateInput, AddInput,
-		SpecificComponent, DeleteOutput) {
+		SpecificComponent, DeleteOutput, UpdateOutput) {
 		// For the options. Using objects is unnecessary in this case
 		$scope.componentTypes = [
 			{ name:'Television', value:'television', index: 0},
@@ -321,6 +321,31 @@ controllers.controller('NewComponentCtrl', [
 				$scope.populateInputList(componentId);
 			} else {
 				console.log('working!');
+			}
+		};
+
+		/*
+			UPDATE output for update button
+		*/
+		$scope.updateOutput = function(componentId, outputId, type, quantity) {
+			if ($scope.outputQuantity !== null && $scope.outputQuantity !== "" && 
+				$scope.outputQuantity !== undefined && $scope.outputType !== null &&
+				$scope.outputType !== "" && $scope.outputType !== undefined &&
+				$scope.outputId !== null && $scope.outputId !== "" &&
+				$scope.outputId !== undefined) {
+
+				var updates = {
+					type: type,
+					quantity: quantity
+				};
+
+				UpdateOutput.update( { componentId: componentId, outputId: outputId }, updates);
+
+				$scope.populateList()
+				$scope.clearOutputForm();
+				$scope.populateOutputList(componentId);
+			} else {
+				console.log('not fired');
 			}
 		};
 

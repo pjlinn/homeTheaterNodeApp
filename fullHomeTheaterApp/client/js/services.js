@@ -73,6 +73,13 @@ services.factory('DeleteOutput', ['$resource', function($resource) {
 	}
 ]);
 
+services.factory('UpdateOutput', ['$resource', function($resource) {
+		return $resource('http://localhost:3000/components/outputs/update/:componentId/:outputId', {}, {
+			update: { method: 'PUT', params: {} }
+		});
+	}
+]);
+
 services.factory('SpecificComponent', ['$resource', function($resource) {
 		return $resource('http://localhost:3000/components/find/:componentId', {}, {
 			query: { method: 'GET', params: {} }
