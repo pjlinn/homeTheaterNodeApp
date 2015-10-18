@@ -70,9 +70,9 @@ controllers.controller('MainCtrl', [
 
 controllers.controller('NewComponentCtrl', [
 	'$scope', 'Components', 'UpdateComponent', 'DeleteInput', 'UpdateInput', 'AddInput',
-	'SpecificComponent', 'DeleteOutput', 'UpdateOutput',
+	'SpecificComponent', 'DeleteOutput', 'UpdateOutput', 'AddOutput',
 	function($scope, Components, UpdateComponent, DeleteInput, UpdateInput, AddInput,
-		SpecificComponent, DeleteOutput, UpdateOutput) {
+		SpecificComponent, DeleteOutput, UpdateOutput, AddOutput) {
 		// For the options. Using objects is unnecessary in this case
 		$scope.componentTypes = [
 			{ name:'Television', value:'television', index: 0},
@@ -372,6 +372,29 @@ controllers.controller('NewComponentCtrl', [
 			}
 		};
 
+		/*
+			ADD output for add button
+		*/
+		$scope.addOutput = function(componentId, type, quantity) {
+			if ($scope.outputQuantity !== null && $scope.outputQuantity !== "" && 
+				$scope.outputQuantity !== undefined && $scope.outputType !== null &&
+				$scope.outputType !== "" && $scope.outputType !== undefined) {
+
+				var newOutput = {
+					type: type,
+					quantity: quantity
+				};
+
+				AddOutput.add( {componentId: componentId }, newOutput);
+
+				$scope.populateList();
+				$scope.clearOutputForm();
+				$scope.populateOutputList(componentId);
+			} else {
+				console.log("didn't fire");
+			}
+		};
+		
 		/*
 			PUT updates to the component
 		*/

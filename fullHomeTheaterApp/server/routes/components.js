@@ -219,6 +219,26 @@ router.put('/outputs/update/:componentId/:outputId', function(req, res, next) {
 	);
 });
 
+// POST /components/outputs/add/:componentId
+router.put('/outputs/add/:componentId', function(req, res, next) {
+	var componentId = req.params.componentId;
+
+	var newOutput = {
+		type: req.body.type,
+		quantity: req.body.quantity
+	};
+
+	Component.findByIdAndUpdate(componentId,
+		{ $push: { 'outputs': { type: newOutput.type, quantity: newOutput.quantity } } },
+
+		function(err, doc) {
+			if (err) return err;
+			res.json(doc);
+			next();
+		}
+	);
+});
+
 // PUT /components/update/:_id
 router.put('/update/:_id', function(req, res, next) {
 	var componentId = req.params._id;

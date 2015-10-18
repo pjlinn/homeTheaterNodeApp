@@ -1,6 +1,9 @@
 /*
 	e2e test to make sure the edits are correct and propogating through
 	the database. Also should make sure the delete is working.
+
+	To run and pass: test component must be normalized by running:
+	jasmine-node createComponents_spec.js (this will actually fail 1 test, but it doesn't matter)
 */
 
 describe('Home Theater App "Edit Component" Page', function() {
@@ -191,5 +194,107 @@ describe('Home Theater App "Edit Component" Page', function() {
 
 		updateComponentBtn.click();	
 
+	});
+
+	it('should search for samsung, then test the add/update/delete functionality for inputs and outputs, then set it back', function() {
+		browser.get('http://localhost:3000/home/#/editComponentView');
+
+		var componentId = element(by.model('componentId')),
+			searchBox = element(by.model('query')),
+			inputType = element(by.model('inputType')),
+			inputQuantity = element(by.model('inputQuantity')),
+			inputId = element(by.model('inputId')),
+			addInputBtn = element(by.id('addInput')),
+			updateInputBtn = element(by.id('updateInput')),
+			deleteInputBtn = element(by.id('deleteInput')),
+			outputType = element(by.model('outputType')),
+			outputQuantity = element(by.model('outputQuantity')),
+			outputId = element(by.model('outputId')),
+			addOutputBtn = element(by.id('addOutput')),
+			updateOutputBtn = element(by.id('updateOutput')),
+			deleteOutputBtn = element(by.id('deleteOutput'));
+
+		/*
+			Click samsung, then click first input in list and first output
+		*/
+		searchBox.sendKeys('samsung');
+
+		var componentRow = element(by.repeater('component in components').row(0));
+		componentRow.click();
+
+		var inputRow = element(by.repeater('input in componentInputs').row(0));
+		inputRow.click();
+
+		var outputRow = element(by.repeater('output in componentOutputs').row(0));
+		outputRow.click();
+
+		/*
+			Check proper values are populated in the forms.
+		*/
+		expect(inputType.getAttribute('value')).toEqual('ac power');
+		expect(inputQuantity.getAttribute('value')).toEqual('1');
+
+		expect(outputType.getAttribute('value')).toEqual('audio-l');
+		expect(outputQuantity.getAttribute('value')).toEqual('1');
+
+		/*
+			Check update functionality
+		*/
+		inputType.clear().sendKeys('direct current power');
+		inputQuantity.clear().sendKeys('17');
+
+		outputType.clear().sendKeys('headphone-l');
+		outputQuantity.clear().sendKeys('23');
+
+		updateInputBtn.click();
+		updateOutputBtn.click();
+
+		inputRow.click();
+		outputRow.click();
+
+		expect(inputType.getAttribute('value')).toEqual('direct current power');
+		expect(inputQuantity.getAttribute('value')).toEqual('17');
+
+		expect(outputType.getAttribute('value')).toEqual('headphone-l');
+		expect(outputQuantity.getAttribute('value')).toEqual('23');
+
+		/*
+			Check delete functionality
+		*/
+		deleteInputBtn.click();
+		deleteOutputBtn.click();
+
+		inputRow.click();
+		outputRow.click();
+
+		expect(inputType.getAttribute('value')).toEqual('hdmi');
+		expect(inputQuantity.getAttribute('value')).toEqual('1');
+
+		expect(outputType.getAttribute('value')).toEqual('audio-r');
+		expect(outputQuantity.getAttribute('value')).toEqual('1');
+
+		/*
+			Check add functionality
+		*/
+		inputType.clear().sendKeys('ac power');
+		inputQuantity.clear().sendKeys('1');
+
+		outputType.clear().sendKeys('audio-l');
+		outputQuantity.clear().sendKeys('1');
+
+		addInputBtn.click();
+		addOutputBtn.click();
+
+		inputRow = element(by.repeater('input in componentInputs').row(2));
+		inputRow.click();
+
+		outputRow = element(by.repeater('output in componentOutputs').row(2));
+		outputRow.click();
+
+		expect(inputType.getAttribute('value')).toEqual('ac power');
+		expect(inputQuantity.getAttribute('value')).toEqual('1');
+
+		expect(outputType.getAttribute('value')).toEqual('audio-l');
+		expect(outputQuantity.getAttribute('value')).toEqual('1');			
 	});
 });
